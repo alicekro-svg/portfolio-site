@@ -166,9 +166,10 @@
      buffering (clicked but not yet playing, or re-buffering mid-playback
      on a slow connection), so it's clear something is happening instead of
      looking stuck. */
-  .video-spinner{position:absolute; right:11px; bottom:11px; width:54px; height:54px; border-radius:50%; border:3px solid rgba(255,255,255,0.3); border-top-color:var(--pill-amber); opacity:0; pointer-events:none; z-index:3; animation:video-spin .8s linear infinite; transition:opacity .15s ease;}
+  .video-spinner{position:absolute; right:11px; bottom:11px; width:54px; height:54px; opacity:0; pointer-events:none; z-index:3; transition:opacity .15s ease;}
   .is-loading .video-spinner{opacity:1;}
-  @keyframes video-spin{to{transform:rotate(360deg);}}
+  .video-spinner-arc{transform-box:fill-box; transform-origin:center; animation:video-spin .9s linear infinite;}
+  @keyframes video-spin{from{transform:rotate(-90deg);} to{transform:rotate(270deg);}}
   @media (hover:hover) and (pointer:fine){
     .video-block:hover .video-toggle{opacity:1;}
   }
@@ -322,7 +323,7 @@
   <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,5 19,12 7,19"/></svg>
   <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
 </button>
-<span class="video-spinner" aria-hidden="true"></span>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg>
 </div>
 
 <header class="project-header">

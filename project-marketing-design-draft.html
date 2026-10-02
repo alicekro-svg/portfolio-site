@@ -170,9 +170,10 @@
      buffering (clicked but not yet playing, or re-buffering mid-playback
      on a slow connection), so it's clear something is happening instead of
      looking stuck. */
-  .video-spinner{position:absolute; right:11px; bottom:11px; width:54px; height:54px; border-radius:50%; border:3px solid rgba(255,255,255,0.3); border-top-color:var(--pill-amber); opacity:0; pointer-events:none; z-index:3; animation:video-spin .8s linear infinite; transition:opacity .15s ease;}
+  .video-spinner{position:absolute; right:11px; bottom:11px; width:54px; height:54px; opacity:0; pointer-events:none; z-index:3; transition:opacity .15s ease;}
   .is-loading .video-spinner{opacity:1;}
-  @keyframes video-spin{to{transform:rotate(360deg);}}
+  .video-spinner-arc{transform-box:fill-box; transform-origin:center; animation:video-spin .9s linear infinite;}
+  @keyframes video-spin{from{transform:rotate(-90deg);} to{transform:rotate(270deg);}}
   @media (hover:hover) and (pointer:fine){
     .video-block:hover .video-toggle{opacity:1;}
   }
@@ -360,17 +361,17 @@
 </header>
 <div class="project-videos">
   <div class="video-block portrait" id="video-mf-cloud"><video playsinline poster="images/22b958b354cd91e8.jpg"><source src="videos/marketing-video-cloud.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block portrait" id="video-mf-cake"><video playsinline poster="images/784298b09123b789.jpg"><source src="videos/marketing-video-cake.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block portrait" id="video-mf-milk"><video playsinline poster="images/f2ac810e5371aca1.jpg"><source src="videos/marketing-video-milk.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-1"><video playsinline poster="images/9c4fe911f36edc98.jpg"><source src="videos/marketing-video-1.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-2"><video playsinline poster="images/b2c8894625d1cf6e.jpg"><source src="videos/marketing-video-2.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-3"><video playsinline poster="images/7c72b40b71eabfb9.jpg"><source src="videos/marketing-video-3.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block portrait" id="nexora-1"><img src="images/0988764230d24582.jpg" alt="NEXORA — מסחר אלגוריטמי" loading="lazy" decoding="async"></div>
   <div class="video-block portrait" id="nexora-2"><img src="images/1915293979792d88.jpg" alt="NEXORA — מסחר עצמאי" loading="lazy" decoding="async"></div>
   <div class="video-block portrait" id="nexora-3"><img src="images/048759c8668461de.jpg" alt="NEXORA — כל השווקים במקום אחד" loading="lazy" decoding="async"></div>
@@ -378,17 +379,17 @@
   <div class="video-block square" id="row4-2"><img src="images/36a4c67b07013623.jpg" alt="בלי תסריט — סדנת אימפרוביזציה למתחילים" loading="lazy" decoding="async"></div>
   <div class="video-block square" id="row4-3"><img src="images/efe29eef49a72be4.jpg" alt="מיכאן — הניסיון שלך לא מתחיל מאפס 40+" loading="lazy" decoding="async"></div>
   <div class="video-block square" id="video-4"><video playsinline poster="images/74169e1fcac0eb81.jpg"><source src="videos/marketing-video-4.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-6"><video playsinline poster="images/c2cb078144d5920a.jpg"><source src="videos/marketing-video-6.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-5"><video playsinline poster="images/a5868f4f78ae6f8f.jpg"><source src="videos/marketing-video-5.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square" id="video-melts-1"><video playsinline poster="images/f9a94015c9f2ae67.jpg"><source src="videos/marketing-video-7.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square"><video playsinline poster="images/e535daf89638ed11.jpg"><source src="videos/marketing-video-8.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
   <div class="video-block square"><video playsinline poster="images/9dc780551ca1fd33.jpg"><source src="videos/marketing-video-9.mp4" type="video/mp4"></video><button class="video-toggle" aria-label="Pause video" aria-pressed="true"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg></button>
-<span class="video-spinner" aria-hidden="true"></span></div>
+<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg></div>
 </div>
 
 <!-- ALTERNATIVE — a horizontally-scrolling filmstrip (arrows sit on top of
