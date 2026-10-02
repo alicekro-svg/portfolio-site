@@ -81,6 +81,13 @@
   .video-toggle svg{width:18px; height:18px; display:block;}
   .video-toggle .icon-play{width:21.6px; height:21.6px; margin-left:3.6px;}
   .video-toggle.is-paused{opacity:1;}
+  /* Loading spinner ring, shown around the play button while the video is
+     buffering (clicked but not yet playing, or re-buffering mid-playback
+     on a slow connection), so it's clear something is happening instead of
+     looking stuck. */
+  .video-spinner{position:absolute; right:11px; bottom:11px; width:54px; height:54px; border-radius:50%; border:3px solid rgba(255,255,255,0.3); border-top-color:var(--pill-amber); opacity:0; pointer-events:none; z-index:3; animation:video-spin .8s linear infinite; transition:opacity .15s ease;}
+  .is-loading .video-spinner{opacity:1;}
+  @keyframes video-spin{to{transform:rotate(360deg);}}
   @media (hover:hover) and (pointer:fine){
     .video-block:hover .video-toggle{opacity:1;}
   }
@@ -210,6 +217,7 @@
       <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
     </button>
+<span class="video-spinner" aria-hidden="true"></span>
   </div>
   <div class="video-block">
     <video src="videos/color-grading-video-2.mp4" poster="images/b5401e0badefb990.jpg" preload="metadata" playsinline></video>
@@ -217,6 +225,7 @@
       <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
     </button>
+<span class="video-spinner" aria-hidden="true"></span>
   </div>
   <div class="video-block">
     <video src="videos/color-grading-video-3.mp4" poster="images/9b7ee32c6b61e0ff.jpg" preload="metadata" playsinline></video>
@@ -224,6 +233,7 @@
       <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
     </button>
+<span class="video-spinner" aria-hidden="true"></span>
   </div>
 </div>
 
@@ -235,6 +245,7 @@
       <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
     </button>
+<span class="video-spinner" aria-hidden="true"></span>
   </div>
 </div>
 
@@ -326,7 +337,12 @@
         }
 
         function toggle(){
-          if(video.paused){ video.play(); } else { video.pause(); }
+          if(video.paused){
+            if(video.readyState < 3){ block.classList.add('is-loading'); }
+            video.play();
+          } else {
+            video.pause();
+          }
         }
         btn.addEventListener('click', function(e){
           e.stopPropagation();
@@ -341,6 +357,10 @@
         video.addEventListener('play', sync);
         video.addEventListener('pause', sync);
         video.addEventListener('ended', sync);
+        video.addEventListener('waiting', function(){ block.classList.add('is-loading'); });
+        video.addEventListener('playing', function(){ block.classList.remove('is-loading'); });
+        video.addEventListener('pause', function(){ block.classList.remove('is-loading'); });
+        video.addEventListener('ended', function(){ block.classList.remove('is-loading'); });
         sync();
       });
     }
