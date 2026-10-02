@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE junk
+.vscode/
+.idea/
+
+# Working files that aren't part of the published site
+Claude outputs/
+Materials Alice/

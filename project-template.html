@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>[Project Name] — Alice Kroytor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto:wght@600&display=swap" rel="stylesheet">
+<!--
+  PROJECT PAGE TEMPLATE — one shared layout reused for every project.
+
+  How to use: duplicate this file per project (e.g. project-echoes.html,
+  project-vitamina.html), then only touch the parts marked EDIT PER PROJECT:
+  title, tags, description, hero media, and gallery items. Everything else
+  (nav, fonts, colors, footer, spacing) stays identical across all of them —
+  that's what keeps this maintainable as the number of projects grows.
+
+  Gallery is flexible: add/remove .gallery-item blocks freely, and add the
+  "full" class to any item that should span the full width (for a wide
+  hero shot mid-gallery). Works with either <img> or <video> inside.
+-->
+<style>
+  :root{
+    --paper:#ffffff;
+    --ink:#131212;
+    --ink-soft:#1a1a1a;
+    --ink-dark:#16161a;
+    --muted:rgba(19,18,18,0.4);
+    --pill-amber-dark:#d9a236;
+    --pill-neutral:#ebebeb;
+    --pill-neutral-text:#121313;
+    --pill-amber:#ffbf3f;
+    --pill-text-light:#f8f8f8;
+    --hero-purple:#8078ad;
+    --badge-yellow:#ffbf3f;
+    --footer-yellow:#ffbf3f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  img,video{display:block; max-width:100%;}
+
+  /* NAV — identical to the homepage */
+    .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px;}
+  .nav-logo{display:flex; align-items:center; gap:10px;}
+  .nav-logo img, .nav-logo svg{display:block; height:37px; width:37px; flex-shrink:0;}
+  .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
+  .nav-links{display:flex; align-items:center; gap:32px; font-family:'Inter', sans-serif; font-weight:500; font-size:16px;}
+  .nav-links a{color:var(--badge-yellow); position:relative; padding-bottom:2px;}
+  .nav-links a:not(.nav-cta)::after{content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--pill-amber); transition:width .2s ease;}
+  .nav-links a:not(.nav-cta):hover::after{width:100%;}
+  .nav-links a.nav-cta{background:var(--pill-amber); color:var(--pill-text-light); font-weight:600; padding:8px 24px; border-radius:100px;}
+  .nav-links a.nav-cta:hover{background:var(--pill-amber-dark);}
+
+  /* MOBILE MENU — hamburger toggle, shown only below 900px. Uses Alice's
+     own burger/X icon files, swapped by the .active class. */
+  .nav-toggle{display:none; align-items:center; justify-content:center; width:32px; height:32px; background:none; border:none; padding:0; cursor:pointer; flex-shrink:0; position:relative;}
+  .nav-toggle-icon{width:24px; height:24px; display:block; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+  .nav-toggle .icon-close{opacity:0;}
+  .nav-toggle.active .icon-burger{opacity:0;}
+  .nav-toggle.active .icon-close{opacity:1;}
+  .nav-whatsapp{display:inline-flex; align-items:center; gap:8px;}
+  .nav-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
+
+  /* PROJECT HEADER */
+  .project-header{padding:48px 40px 40px; max-width:900px;}
+  .project-back{display:inline-flex; align-items:center; gap:6px; font-size:14px; color:var(--muted); margin-bottom:28px;}
+  .project-back:hover{color:var(--ink);}
+  .project-title{font-family:'Inter', sans-serif; font-weight:400; font-size:56px; line-height:1.05; color:var(--ink);}
+  .project-tags{display:flex; flex-wrap:wrap; align-items:center; margin:10px 0 24px;}
+  .tag-item{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; line-height:20px; color:var(--pill-amber);}
+  .tag-item:not(:last-child)::after{content:'|'; display:inline-block; margin:0 8px; color:var(--pill-amber);}
+  .project-desc{font-size:16px; line-height:1.65; color:var(--ink-soft);}
+
+  /* Standalone paragraph block for splitting the description between media
+     sections (e.g. paragraph → slider → paragraph → videos → paragraph)
+     instead of keeping all the text together in the header. Same measure
+     and type as .project-desc, just usable anywhere in the page. */
+  .project-text{max-width:900px; padding:0 40px 48px; font-size:16px; line-height:1.65; color:var(--ink-soft);}
+
+  /* STANDALONE IMAGE/VIDEO BLOCK — a single media item, not part of a
+     carousel or gallery. Works right under the nav (as the hero) or
+     dropped anywhere else in the page (e.g. between paragraphs) — it's not
+     pinned to any one spot structurally. Default is wide 16:9; add
+     .square (1080×1080, i.e. 1:1) or .portrait (4:5) for other source
+     formats. Optional; delete the block entirely for a project that
+     doesn't have a standalone shot to show. */
+  .project-hero-media{position:relative; margin:0 40px; margin-top:24px; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:var(--pill-neutral);}
+  .project-hero-media img, .project-hero-media video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .project-hero-media.square{aspect-ratio:1/1; max-width:560px; margin-left:auto; margin-right:auto;}
+  .project-hero-media.portrait{aspect-ratio:4/5; max-width:560px; margin-left:auto; margin-right:auto;}
+  .media-tag{position:absolute; top:16px; left:16px; background:var(--paper); color:var(--ink-soft); font-size:12px; padding:6px 12px; border-radius:6px; z-index:2;}
+
+  /* SLIDER — horizontal scrolling row for a set of same-shape images (e.g.
+     a portrait series). Swipe/drag on trackpad or touch; snaps per item.
+     Use this instead of (or alongside) the masonry gallery when the project
+     is a single cohesive set that reads better as a filmstrip than a grid. */
+  .slider-wrap{position:relative;}
+  .project-slider{display:flex; gap:16px; overflow-x:auto; padding:0 40px 56px; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none;}
+  .project-slider::-webkit-scrollbar{display:none;}
+  .slider-item{position:relative; flex:0 0 260px; aspect-ratio:4/5; border-radius:16px; overflow:hidden; scroll-snap-align:start; background:var(--pill-neutral);}
+  .slider-item img, .slider-item video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+
+  /* Arrows + dots — e-commerce-style carousel controls. Full styling lives
+     here; only *visibility* differs by context — hidden by default (the
+     desktop filmstrip is wide enough to drag/scroll directly), forced on
+     for mobile (below), and forced on for the hero carousel at any size
+     (see .hero-slider-wrap) since only one slide shows at a time there. */
+  .slider-arrow{display:none; align-items:center; justify-content:center; position:absolute; top:calc(50% - 16px); transform:translateY(-50%); width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.92); border:none; box-shadow:0 4px 12px rgba(0,0,0,0.18); font-size:18px; line-height:1; color:var(--ink); cursor:pointer; z-index:5; padding:0;}
+  .slider-arrow-prev{left:28px;}
+  .slider-arrow-next{right:28px;}
+  .slider-arrow:disabled{opacity:0.35; cursor:default;}
+  .slider-dots{display:none; justify-content:center; align-items:center; gap:8px; padding:4px 20px 8px;}
+  .slider-dot{width:7px; height:7px; padding:0; border:none; border-radius:50%; background:var(--pill-neutral); cursor:pointer;}
+  .slider-dot.active{background:var(--pill-amber); width:20px; border-radius:4px; transition:width .2s ease, background .2s ease;}
+
+  /* HERO CAROUSEL — a card-style single-slide-at-a-time carousel, used
+     instead of a static .project-hero-media image when the "hero" is
+     really a set of interchangeable shots (e.g. the same portrait series
+     used in the slider below). Reuses .slider-wrap/.project-slider/
+     .slider-item structurally so the same JS drives both; this modifier
+     class just restyles it as one full-width card with arrows/dots always
+     visible, rather than a peeking filmstrip. The card itself (rounded,
+     clipped, shadowed) is a separate inner .hero-slider-card so the arrows
+     can sit in the open white space beside it instead of on top of the photo. */
+  .hero-slider-wrap{display:flex; align-items:center; justify-content:center; gap:20px; max-width:700px; margin:24px auto 0;}
+  .hero-slider-card{flex:0 1 560px; border-radius:20px; overflow:hidden; box-shadow:0 20px 45px rgba(0,0,0,0.15);}
+  .hero-slider-wrap .project-slider{padding:0; gap:0;}
+  .hero-slider-wrap .slider-item{flex:0 0 100%; aspect-ratio:4/5; border-radius:0;}
+  /* Square variant — same carousel, square (1:1) items instead of 4:5
+     portraits. Add .square-carousel alongside .hero-slider-wrap. */
+  .hero-slider-wrap.square-carousel .slider-item{aspect-ratio:1/1;}
+  /* Arrows are desktop-only (swipe covers mobile), styled like the yellow
+     Contact pill button, and sit beside the card rather than absolutely
+     positioned over the photo. */
+  .hero-slider-wrap .slider-arrow{position:static; left:auto; right:auto; transform:none; flex:0 0 auto; display:flex; background:var(--pill-amber); color:var(--pill-text-light); box-shadow:0 8px 20px rgba(0,0,0,0.25);}
+  .hero-slider-wrap .slider-arrow:hover{background:var(--pill-amber-dark);}
+  .hero-slider-wrap .slider-arrow:disabled{opacity:0.4;}
+  .hero-slider-wrap + .slider-dots{display:flex;}
+
+  /* VIDEOS — one or more full videos shown in sequence (not mixed into the
+     slider/gallery), e.g. finished edits meant to be watched rather than
+     skimmed. Stack more .video-block divs for more videos. */
+  .project-videos{display:flex; flex-wrap:wrap; gap:24px; padding:0 40px 72px;}
+  .video-block{position:relative; flex:1 1 300px; max-width:420px; aspect-ratio:9/16; border-radius:16px; overflow:hidden; background:var(--pill-neutral);}
+  .video-block video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  /* Play/pause toggle, centered on the video. Videos don't autoplay — they
+     sit on their poster frame until clicked, play once with sound, and stop
+     (no loop) at the end, so the button is always fully visible while
+     paused. While actually playing, it stays hidden until hover on mouse
+     devices and only faintly visible on touch devices, since there's no
+     hover state to reveal it there. */
+  .video-toggle{position:absolute; right:16px; bottom:16px; width:44px; height:44px; border-radius:50%; border:none; background:rgba(0,0,0,0.45); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:4; opacity:0; transition:opacity .2s ease, background .2s ease;}
+  .video-toggle:hover{background:rgba(0,0,0,0.65);}
+  .video-toggle:focus-visible{opacity:1;}
+  .video-toggle svg{width:18px; height:18px; display:block;}
+  .video-toggle .icon-play{width:21.6px; height:21.6px; margin-left:3.6px;}
+  .video-toggle.is-paused{opacity:1;}
+  @media (hover:hover) and (pointer:fine){
+    .video-block:hover .video-toggle{opacity:1;}
+  }
+
+  /* GALLERY — masonry (CSS columns), not a fixed grid. Each item keeps its
+     own real aspect ratio instead of being cropped to match the others, so
+     square photos, 9:16 stories, and wide 16:9 stills/video can sit in the
+     same gallery without distortion or gaps. Add/remove .gallery-item
+     freely, mix image + video, pick whichever of square / story / wide
+     matches the actual asset (or once a real <img>/<video> is dropped in,
+     just delete the ratio class and let it size itself naturally).
+     .full breaks out to the full gallery width, for an occasional hero shot
+     mid-gallery. */
+  .project-gallery{columns:2 300px; column-gap:24px; padding:0 40px 72px;}
+  .gallery-item{position:relative; break-inside:avoid; margin-bottom:24px; border-radius:16px; overflow:hidden; background:var(--pill-neutral);}
+  .gallery-item img, .gallery-item video{display:block; width:100%; height:auto; border-radius:16px;}
+  .gallery-item.square{aspect-ratio:1/1;}
+  .gallery-item.portrait{aspect-ratio:4/5;}
+  .gallery-item.story{aspect-ratio:9/16;}
+  .gallery-item.wide{aspect-ratio:16/9;}
+  .gallery-item.full{column-span:all; aspect-ratio:16/9; margin-top:24px;}
+  .gallery-placeholder{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--muted);}
+
+  /* NEXT PROJECT */
+  .project-next{padding:32px 40px 56px; border-top:1px solid rgba(19,18,18,0.08); display:flex; justify-content:space-between; align-items:center; gap:24px;}
+  .project-next span{display:block; font-size:12px; color:var(--muted); margin-bottom:4px;}
+  .project-next a{font-size:20px; font-weight:400; color:var(--ink);}
+  .project-next a:hover{color:var(--pill-amber);}
+
+  /* FOOTER — two-tier redesign: amber "let's work together" CTA band (big
+     outline "a." mark on the left, heading + contact row centered to the
+     right of it), then a quiet cream info band with the wordmark, links and
+     rights line. Matches Alice's Figma footer — same footer used sitewide. */
+  footer{background:none; padding:0; display:block;}
+  .footer-cta-band{position:relative; background:var(--pill-amber); padding:40px 40px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .footer-cta-inner{position:relative; z-index:1; max-width:640px; margin:0 auto; text-align:center;}
+  .footer-cta-heading{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; text-transform:uppercase; color:#fff; margin-bottom:29px;}
+  .footer-cta-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:32px;}
+  .footer-phone, .footer-email{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; color:#fff;}
+  .footer-whatsapp{display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--pill-amber); font-family:'Inter', sans-serif; font-weight:600; font-size:16px; padding:10px 24px; border-radius:100px; transition:background .2s ease;}
+  .footer-whatsapp:hover{background:#fff2d6;}
+  .footer-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
+  .footer-info-band{position:relative; background:#fff5e0; height:200px;}
+  .footer-info-left{position:absolute; left:18.3%; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px;}
+  .footer-info-name{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:#838383; text-align:left;}
+  .footer-info-links{display:flex; flex-direction:column; gap:6px; font-family:'Inter', sans-serif; font-weight:400; font-size:16px; color:#838383; text-align:left;}
+  .footer-info-rights{position:absolute; left:43.3%; bottom:12%; font-family:'Inter', sans-serif; font-weight:400; font-size:14.4px; color:#838383; white-space:nowrap;}
+  @media (max-width:900px){
+    .footer-cta-heading{font-size:28px;}
+    .footer-cta-row{flex-direction:column; gap:16px;}
+    .footer-whatsapp{order:-1;}
+    .footer-info-band{position:static; height:auto; display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 20px; gap:16px;}
+    .footer-info-left{position:static; transform:none; align-items:center;}
+    .footer-info-rights{position:static; font-size:11.7px; white-space:normal;}
+    .footer-info-name, .footer-info-links{text-align:center;}
+  }
+
+  @media (max-width:900px){
+        .site-nav{padding:16px 20px; gap:12px;}
+    .nav-logo img, .nav-logo svg{height:29px; width:29px;}
+    .nav-logo-text{font-size:15px;}
+    .site-nav{position:relative;}
+    .nav-toggle{display:flex;}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:8px 20px 20px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
+    .nav-links.open{display:flex;}
+    .nav-links a{width:100%; padding:12px 0; font-size:16px; text-align:right;}
+    .nav-links a.nav-cta{width:auto; margin-top:8px;}
+    .project-header{padding:32px 20px 24px;}
+    .project-title{font-size:clamp(34px,9vw,48px);}
+    .tag-item{font-size:12px; line-height:18px;}
+    .tag-item:not(:last-child)::after{margin:0 6px;}
+    .project-text{padding:0 20px 32px;}
+    .project-hero-media{margin:16px 0 0; border-radius:0;}
+    .project-hero-media.square, .project-hero-media.portrait{margin-left:0; margin-right:0; max-width:none;}
+    .hero-slider-wrap{margin:16px 0 0; max-width:none;}
+    .hero-slider-card{border-radius:0; box-shadow:none;}
+    .project-slider{padding:0 20px 32px; gap:12px;}
+    .slider-item{flex-basis:240px;}
+    .slider-arrow{display:flex;}
+    .hero-slider-wrap .slider-arrow{display:none;}
+    .slider-dots{display:flex;}
+    .project-videos{padding:0 20px 48px; gap:16px;}
+    .video-block{flex-basis:100%; max-width:100%;}
+    .project-gallery{columns:1; column-gap:16px; padding:0 20px 48px;}
+    .gallery-item{margin-bottom:16px;}
+    .gallery-item.full{aspect-ratio:4/5; margin-top:16px;}
+    .project-next{padding:24px 20px 40px; flex-wrap:wrap;}
+  }
+
+  .cookie-banner{position:fixed; left:0; right:0; bottom:0; z-index:200; background:var(--pill-amber); color:var(--ink-soft); padding:18px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 24px; box-shadow:0 -4px 20px rgba(0,0,0,0.18); transform:translateY(100%); transition:transform .3s ease;}
+  .cookie-banner.visible{transform:translateY(0);}
+  .cookie-banner p{font-size:14px; line-height:1.5; max-width:420px; text-align:left; margin:0;}
+  .cookie-banner a{text-decoration:underline; color:var(--ink);}
+  .cookie-banner-categories{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:16px;}
+  .cookie-toggle{position:relative; display:flex; align-items:center; gap:8px; font-family:'Inter', sans-serif; font-size:13px; cursor:pointer; user-select:none;}
+  .cookie-toggle.disabled{cursor:default; opacity:0.75;}
+  .cookie-toggle input{position:absolute; opacity:0; width:0; height:0;}
+  .cookie-toggle-track{position:relative; width:34px; height:20px; border-radius:100px; background:rgba(19,18,18,0.25); transition:background .2s ease; flex-shrink:0;}
+  .cookie-toggle-track::after{content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); transition:transform .2s ease;}
+  .cookie-toggle input:checked + .cookie-toggle-track{background:var(--ink);}
+  .cookie-toggle input:checked + .cookie-toggle-track::after{transform:translateX(14px);}
+  .cookie-toggle input:disabled + .cookie-toggle-track{background:var(--ink); opacity:0.6;}
+  .cookie-banner-actions{display:flex; gap:10px; flex-shrink:0;}
+  .cookie-banner-reject{background:transparent; color:var(--ink-soft); font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:9px 20px; border-radius:100px; border:1.5px solid var(--ink-soft); cursor:pointer; white-space:nowrap;}
+  .cookie-banner-reject:hover{background:rgba(19,18,18,0.08);}
+  .cookie-banner-accept{background:#282828; color:var(--pill-text-light); font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:10px 22px; border-radius:100px; border:none; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .cookie-banner-accept:hover{background:#3a3a3a;}
+  @media (max-width:900px){
+    .cookie-banner{padding:12px 16px; flex-direction:column; gap:8px;}
+    .cookie-banner p{font-size:12px; line-height:1.35; max-width:100%; text-align:center;}
+    .cookie-banner-categories{justify-content:center; gap:10px 14px;}
+    .cookie-toggle{font-size:11px; gap:5px;}
+    .cookie-toggle-track{width:28px; height:16px;}
+    .cookie-toggle-track::after{width:12px; height:12px;}
+    .cookie-toggle input:checked + .cookie-toggle-track::after{transform:translateX(12px);}
+    .cookie-banner-actions{width:100%; gap:8px;}
+    .cookie-banner-actions .cookie-banner-reject, .cookie-banner-actions .cookie-banner-accept{flex:1; padding:7px 12px; font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html"><svg viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="25.2571" cy="25.2571" r="25.2571" fill="#FFBF3F"/><path d="M39.0549 34.5419C37.6419 34.5419 36.498 33.4989 36.498 32.0523C36.498 30.6393 37.6419 29.5628 39.0549 29.5628C40.5352 29.5628 41.6117 30.6393 41.6117 32.0523C41.6117 33.4989 40.5352 34.5419 39.0549 34.5419Z" fill="white"/><path d="M22.6168 34.5421C17.6713 34.5421 14.2734 30.8414 14.2734 25.3577C14.2734 19.8067 17.6377 15.9714 22.4822 15.9714C25.5437 15.9714 27.2595 17.7881 27.8651 18.6965H28.1006V16.4088H32.4741V34.1048H28.1678V31.8507H27.9323C27.4277 32.5909 25.8465 34.5421 22.6168 34.5421ZM23.4579 30.6059C26.3848 30.6059 28.2015 28.251 28.2015 25.2904C28.2015 21.9598 26.1829 19.9412 23.4242 19.9412C20.6319 19.9412 18.7143 22.1616 18.7143 25.2904C18.7143 28.4865 20.6319 30.6059 23.4579 30.6059Z" fill="white"/></svg><span class="nav-logo-text">Alice Kroytor</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <img class="nav-toggle-icon icon-burger" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAVdJREFUeAHt3EERwDAMxECnU2CFXmZJeGgXg+Z+9trXkPUMaQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOLe+b+hywLECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQNzyKrbNAsQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiHIfGWYA4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiHMcGmcB4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHGOQ+MsQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHEOQ6NswBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAog74xET8009zhMAAAAASUVORK5CYII=" alt="">
+    <img class="nav-toggle-icon icon-close" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAABMFJREFUeAHtnS2SFEEQRmsJBAKJWIFAIJAIBIIDcAAOgEAikBwBiUAikAgOwAGQCCRiBQKxArkCQQTwxURG7MLsbHd1ZlVmfvkiJrBFvbd/M11ZR7//0gparrWCmgqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnArAO7/OmiV2Afw83b2Kfr69a+3zM9N9tAkAC/7yYveqCPqAfLxkL432UT+A8ws2XnxaRL5guI+6AexbaEWwjn/lC0b7qBfAoQVWBMu4TL5gsI86ASxZWEVwmKvkC8r7uD2ANQuqCPazVL6guI/bAuhZSEVwkbXyBaV97A9gywIqgh298gWFfTzqeixcS+CN49buv979y8ZW+efB/j1429r1m20tfd8BTt7ofPWyfifQlA+OH3fJB30B3HvZ2s27TQW2CLTl33m6e3XSFwBqw7fuimAdzuSD/l8CK4J1OJQPtv0ZWBEsw6l8sP2NoIrgMI7lA523giuC/TiXD/Q+DKoILhJAPtD9OLgi2BFEPtB/IIQ9gkDygc0jYawRBJMP7B4KZYsgoHxg+1g4SwRB5QP7cwHZIwgsH4w5GJI1guDywbiTQdkiSCAfjD0aliWCJPLB+LOB0SNIJB/MORwaNYJk8sG808HRIkgoH8w9Hh4lgqTywfz5AN4jSCwf+BgQ4TWC5PKBnwkh3iIgkA98jYjxEgGJfOBvRtDsCIjkA59DomZFQCYf+J0SNjoCQvnA95i4URGQygf+5wRaR0AsHxyFuTUMAxMh7uykqYAj1bcetfb9Q1MjmHwQJwCgHYEmAeWDWKNitX8caBFUPog3K9hbBIHlg5jDor1EEFw+iDstfHYECeSD2OPiZ0WQRD6If1/A6AgSyQc5LowYFUEy+SDPjSHWESSUD/IEACQC7cGTt5+klA9yBQDw1q72Q6E/PsUbUrGQXAFof7AjJB5hlycAK/lC0ghyBGAtX0gYQfwARskXkkUQO4DR8oVEEcQNYJZ8IUkEMQOYLV9IEEG8ALzIF4JHECsAbfmdt2z8R+AI4gRg8fTuw/f0Y21jBGD16HbNNg4QgPVz++QR+A5g1KEN4gj8BjD6xA5pBD4DmHVcizACfwHMPqtHFoGvALwc1CSKwE8A3k7pkkTgIwCvR7QJIpgfgPfz+ckjmBtAlOEMiSOYF0C0yRxJI5gTQNSxLAkjGB9AVPlCsgjGBhBdvpAognEBZJEvJIlgTADZ5AsJIrAPIKt8IXgEtgFkly8EjsAuABb5QtAIbAJgky8EjEA/AFb5QrAIdANgly8EikAvgJJ/kSAR6ARQ8vcTIILtAZT8wziPYFsAJX8ZjiPoD6Dkr8NpBH0B4OKG049NjezyBYcR9AWgOZCRRb7g7L6D/h8BkL81Ajb5glYECg62/RK4ZQGs8oWtEWh8ATaNPwN7FsIuX+iNQEk+0HkjaM2CSv5F1kagKB/ovRW8ZGElfz9LI1CWD3Q/DDq0wJJ/mKsiMJAP9D8O3rfQkr+MyyIwkg/sbg6VNymOH5f8tZy/IdVQPrC9Ohb/Ea1ZfGxg776+au3uczP5INbdwYU6uW4MKVZTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZDzB2MmtRujuJ1hAAAAAElFTkSuQmCC" alt="">
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#projects">Work</a>
+    <a href="https://wa.me/972548100797" target="_blank" rel="noopener" class="nav-cta nav-whatsapp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.113.573 4.09 1.575 5.79L2 22l4.336-1.537a9.945 9.945 0 0 0 5.668 1.53h.004c5.518 0 9.994-4.476 9.994-9.994C21.994 6.476 17.518 2 12.004 2zm0 18.198h-.003a8.19 8.19 0 0 1-4.176-1.145l-.3-.179-3.104 1.1 1.04-3.024-.196-.31a8.195 8.195 0 0 1-1.256-4.373C4.011 7.514 7.53 4 12.005 4c2.19 0 4.248.854 5.796 2.404a8.13 8.13 0 0 1 2.402 5.791c-.002 4.478-3.62 8.003-8.199 8.003z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ============== EDIT PER PROJECT: everything below, until "END EDIT PER PROJECT" ============== -->
+
+<!-- HERO CAROUSEL — the current default: a single-slide-at-a-time card
+     carousel (arrows beside it, dots below), good when the "hero" is a set
+     of interchangeable shots rather than one fixed image. This is what
+     project-echoes.html uses. Delete the prev/next buttons entirely for a
+     project where dots + swipe/drag are enough.
+
+     Also works for a cover + numbered pages sequence (a catalog/booklet
+     project): project-morphe.html leads with a cover slide, then one slide
+     per page in order. Same markup, just more slider-items. -->
+<div class="slider-wrap hero-slider-wrap">
+<button class="slider-arrow slider-arrow-prev" aria-label="Previous photo">&#8249;</button>
+<div class="hero-slider-card">
+<div class="project-slider">
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 1]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 2]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 3]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 4]</span></div>
+</div>
+</div>
+<button class="slider-arrow slider-arrow-next" aria-label="Next photo">&#8250;</button>
+</div>
+<div class="slider-dots"></div>
+
+<!-- ALTERNATIVE — a single static wide hero image/video instead of a
+     carousel. Use this OR the hero carousel above, not both.
+<div class="project-hero-media">
+  <span class="media-tag">[Video Placeholder]</span>
+</div>
+-->
+
+<!-- ALTERNATIVE — square carousel, for a series of 1080×1080 shots instead
+     of 4:5 portraits. Same markup as the hero carousel, just add
+     .square-carousel alongside .hero-slider-wrap.
+<div class="slider-wrap hero-slider-wrap square-carousel">
+<button class="slider-arrow slider-arrow-prev" aria-label="Previous photo">&#8249;</button>
+<div class="hero-slider-card">
+<div class="project-slider">
+  <div class="slider-item"><span class="gallery-placeholder">[Square photo 1]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Square photo 2]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Square photo 3]</span></div>
+</div>
+</div>
+<button class="slider-arrow slider-arrow-next" aria-label="Next photo">&#8250;</button>
+</div>
+<div class="slider-dots"></div>
+-->
+
+<!-- ALTERNATIVE — one standalone image/video, not part of a carousel or
+     gallery. Drop this anywhere in the page (not just under the nav).
+     Default is wide 16:9 (see .project-hero-media above); add .square
+     (1080×1080) or .portrait (4:5) for other source formats.
+
+     Proven pattern: project-morphe.html stacks SEVEN plain (no modifier)
+     16:9 .project-hero-media blocks in a row, right after the header/desc,
+     to show a run of mockup shots (cover + page spreads) one after another
+     — no carousel needed when every image should just be seen, in order.
+     Copy that block from project-morphe.html when a project has a run of
+     wide mockups/screens rather than a single hero image.
+<div class="project-hero-media square">
+  <span class="media-tag">[Square photo]</span>
+</div>
+<div class="project-hero-media portrait">
+  <span class="media-tag">[4:5 photo]</span>
+</div>
+-->
+
+<header class="project-header">
+  <a href="index.html#projects" class="project-back">← All projects</a>
+  <h1 class="project-title">[Project Name]</h1>
+  <div class="project-tags">
+    <span class="tag-item">Concept</span>
+    <span class="tag-item">Branding</span>
+    <span class="tag-item">AI Images</span>
+    <span class="tag-item">Editing</span>
+  </div>
+  <p class="project-desc">[Paragraph 1 — sets up the project.]</p>
+</header>
+
+<!-- ALTERNATIVE — a horizontally-scrolling filmstrip (arrows sit on top of
+     the images, since there's no white space beside a filmstrip the way
+     there is beside the hero card). Good for one cohesive set of
+     same-shape images when you don't want the single-card hero treatment.
+<div class="slider-wrap">
+<div class="project-slider">
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 1]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 2]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 3]</span></div>
+  <div class="slider-item"><span class="gallery-placeholder">[Photo 4]</span></div>
+</div>
+  <button class="slider-arrow slider-arrow-prev" aria-label="Previous photo">&#8249;</button>
+  <button class="slider-arrow slider-arrow-next" aria-label="Next photo">&#8250;</button>
+</div>
+<div class="slider-dots"></div>
+-->
+
+<p class="project-text">[Paragraph 2 — continues the story after the slider.]</p>
+
+<!-- VIDEOS — finished video pieces shown one after another, not mixed into
+     the slider. Delete if the project has none. No autoplay/loop attributes
+     on the <video> tag on purpose — it sits on its poster frame until the
+     viewer clicks play, then plays once with sound and stops at the end.
+     Each video gets a centered play/pause button via .video-toggle — keep
+     the two <svg> icons as-is, the script below toggles which one shows. -->
+<div class="project-videos">
+  <div class="video-block">
+    <span class="gallery-placeholder">[Video 1]</span>
+    <button class="video-toggle" aria-label="Pause video" aria-pressed="true">
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
+    </button>
+  </div>
+  <div class="video-block">
+    <span class="gallery-placeholder">[Video 2]</span>
+    <button class="video-toggle" aria-label="Pause video" aria-pressed="true">
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="7,5 19,12 7,19"/></svg>
+    </button>
+  </div>
+</div>
+
+<p class="project-text">[Paragraph 3 — closing thought, sits at the end.]</p>
+
+<!-- MASONRY GALLERY — an alternative to the slider, better when a project's
+     images are mixed formats (square + story + wide) rather than one
+     uniform series. Use one pattern or the other, not usually both.
+     See .gallery-item / .square / .portrait / .story / .wide / .full above. -->
+<!--
+<div class="project-gallery">
+  <div class="gallery-item square"><span class="gallery-placeholder">[Square photo]</span></div>
+  <div class="gallery-item story"><span class="gallery-placeholder">[Story-format video]</span></div>
+</div>
+-->
+
+<div class="project-next">
+  <div>
+    <span>Next project</span>
+    <a href="project-template.html">[Next Project Name] →</a>
+  </div>
+</div>
+
+<!-- ============== END EDIT PER PROJECT ============== -->
+
+<footer id="contact">
+  <div class="footer-cta-band">
+    <div class="footer-cta-inner">
+      <h2 class="footer-cta-heading">Let&rsquo;s work together</h2>
+      <div class="footer-cta-row">
+        <a class="footer-phone" href="tel:+972548100797">+972.54.8100.797</a>
+        <a class="footer-email" href="mailto:alicekro@gmail.com">alicekro@gmail.com</a>
+        <a class="footer-whatsapp" href="https://wa.me/972548100797" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.113.573 4.09 1.575 5.79L2 22l4.336-1.537a9.945 9.945 0 0 0 5.668 1.53h.004c5.518 0 9.994-4.476 9.994-9.994C21.994 6.476 17.518 2 12.004 2zm0 18.198h-.003a8.19 8.19 0 0 1-4.176-1.145l-.3-.179-3.104 1.1 1.04-3.024-.196-.31a8.195 8.195 0 0 1-1.256-4.373C4.011 7.514 7.53 4 12.005 4c2.19 0 4.248.854 5.796 2.404a8.13 8.13 0 0 1 2.402 5.791c-.002 4.478-3.62 8.003-8.199 8.003z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-info-band">
+    <div class="footer-info-left">
+      <p class="footer-info-name">Alice Kroytor</p>
+      <div class="footer-info-links">
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="cookie-policy.html">Cookie policy</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="#" id="cookieSettingsLink">Cookie settings</a>
+      </div>
+    </div>
+    <p class="footer-info-rights">© 2026 Alice Kroytor. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    if(!toggle || !links) return;
+    toggle.addEventListener('click', function(){
+      var isOpen = links.classList.toggle('open');
+      toggle.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    function initSliders(){
+      document.querySelectorAll('.slider-wrap').forEach(function(wrap){
+        var slider = wrap.querySelector('.project-slider');
+        var prevBtn = wrap.querySelector('.slider-arrow-prev');
+        var nextBtn = wrap.querySelector('.slider-arrow-next');
+        var dotsWrap = wrap.nextElementSibling;
+        if(!slider || !dotsWrap || !dotsWrap.classList.contains('slider-dots')) return;
+        var items = Array.prototype.slice.call(slider.querySelectorAll('.slider-item'));
+        if(!items.length) return;
+
+        dotsWrap.innerHTML = '';
+        var dots = items.map(function(_, i){
+          var dot = document.createElement('button');
+          dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+          dot.addEventListener('click', function(){
+            items[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+          });
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+
+        function updateActive(){
+          var sliderRect = slider.getBoundingClientRect();
+          var center = sliderRect.left + sliderRect.width / 2;
+          var closest = 0, closestDist = Infinity;
+          items.forEach(function(item, i){
+            var r = item.getBoundingClientRect();
+            var dist = Math.abs((r.left + r.width / 2) - center);
+            if(dist < closestDist){ closestDist = dist; closest = i; }
+          });
+          dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+          if(prevBtn) prevBtn.disabled = slider.scrollLeft <= 4;
+          if(nextBtn) nextBtn.disabled = slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 4);
+        }
+
+        var scrollTimer;
+        slider.addEventListener('scroll', function(){
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(updateActive, 80);
+        });
+
+        if(prevBtn) prevBtn.addEventListener('click', function(){
+          var step = items[0].getBoundingClientRect().width + 16;
+          slider.scrollBy({left: -step, behavior:'smooth'});
+        });
+        if(nextBtn) nextBtn.addEventListener('click', function(){
+          var step = items[0].getBoundingClientRect().width + 16;
+          slider.scrollBy({left: step, behavior:'smooth'});
+        });
+
+        updateActive();
+      });
+    }
+    document.addEventListener('DOMContentLoaded', initSliders);
+  })();
+</script>
+
+<script>
+  (function(){
+    function initVideoToggles(){
+      var blocks = Array.prototype.slice.call(document.querySelectorAll('.video-block'));
+      var entries = blocks.map(function(block){
+        var video = block.querySelector('video');
+        var btn = block.querySelector('.video-toggle');
+        return (video && btn) ? {block: block, video: video, btn: btn} : null;
+      }).filter(Boolean);
+      var allVideos = entries.map(function(entry){ return entry.video; });
+
+      entries.forEach(function(entry){
+        var block = entry.block, video = entry.video, btn = entry.btn;
+        var playIcon = btn.querySelector('.icon-play');
+        var pauseIcon = btn.querySelector('.icon-pause');
+
+        function sync(){
+          var isPaused = video.paused;
+          playIcon.style.display = isPaused ? 'block' : 'none';
+          pauseIcon.style.display = isPaused ? 'none' : 'block';
+          btn.setAttribute('aria-label', isPaused ? 'Play video' : 'Pause video');
+          btn.setAttribute('aria-pressed', isPaused ? 'false' : 'true');
+          btn.classList.toggle('is-paused', isPaused);
+        }
+
+        function toggle(){
+          if(video.paused){ video.play(); } else { video.pause(); }
+        }
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          toggle();
+        });
+        block.addEventListener('click', toggle);
+        video.addEventListener('play', function(){
+          allVideos.forEach(function(other){
+            if(other !== video && !other.paused){ other.pause(); }
+          });
+        });
+        video.addEventListener('play', sync);
+        video.addEventListener('pause', sync);
+        video.addEventListener('ended', sync);
+        sync();
+      });
+    }
+    document.addEventListener('DOMContentLoaded', initVideoToggles);
+  })();
+</script>
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <p>We use cookies to improve your experience. See our <a href="cookie-policy.html">Cookie Policy</a> for details.</p>
+  <div class="cookie-banner-categories">
+    <label class="cookie-toggle disabled">
+      <input type="checkbox" id="cookieEssential" checked disabled>
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Essential</span>
+    </label>
+    <label class="cookie-toggle">
+      <input type="checkbox" id="cookieAnalytics">
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Analytics</span>
+    </label>
+    <label class="cookie-toggle">
+      <input type="checkbox" id="cookieAdvertising">
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Advertising</span>
+    </label>
+  </div>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-banner-reject" id="cookieRejectAll">Reject All</button>
+    <button type="button" class="cookie-banner-accept" id="cookieSave">Save Preferences</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var KEY = 'cookieConsent';
+    var banner = document.getElementById('cookieBanner');
+    var analyticsInput = document.getElementById('cookieAnalytics');
+    var advertisingInput = document.getElementById('cookieAdvertising');
+    var rejectBtn = document.getElementById('cookieRejectAll');
+    var saveBtn = document.getElementById('cookieSave');
+    var settingsLink = document.getElementById('cookieSettingsLink');
+    if(!banner || !analyticsInput || !advertisingInput || !rejectBtn || !saveBtn) return;
+
+    function readConsent(){
+      try {
+        var raw = localStorage.getItem(KEY);
+        if(!raw) return null;
+        var parsed = JSON.parse(raw);
+        return (parsed && typeof parsed === 'object') ? parsed : null;
+      } catch(e) { return null; }
+    }
+
+    function applyToToggles(consent){
+      analyticsInput.checked = !!(consent && consent.analytics);
+      advertisingInput.checked = !!(consent && consent.advertising);
+    }
+
+    var saved = readConsent();
+    if(saved){
+      applyToToggles(saved);
+    } else {
+      requestAnimationFrame(function(){ banner.classList.add('visible'); });
+    }
+
+    function save(analytics, advertising){
+      var consent = { essential: true, analytics: analytics, advertising: advertising, updatedAt: new Date().toISOString() };
+      try { localStorage.setItem(KEY, JSON.stringify(consent)); } catch(e) {}
+      banner.classList.remove('visible');
+    }
+
+    rejectBtn.addEventListener('click', function(){
+      analyticsInput.checked = false;
+      advertisingInput.checked = false;
+      save(false, false);
+    });
+
+    saveBtn.addEventListener('click', function(){
+      save(analyticsInput.checked, advertisingInput.checked);
+    });
+
+    if(settingsLink){
+      settingsLink.addEventListener('click', function(e){
+        e.preventDefault();
+        applyToToggles(readConsent());
+        banner.classList.add('visible');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

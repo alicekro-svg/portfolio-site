@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Privacy Policy — Alice Kroytor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --ink:#131212;
+    --ink-soft:#1a1a1a;
+    --ink-dark:#16161a;
+    --muted:rgba(19,18,18,0.4);
+    --pill-amber-dark:#d9a236;
+    --pill-neutral:#ebebeb;
+    --pill-neutral-text:#121313;
+    --pill-amber:#ffbf3f;
+    --pill-text-light:#f8f8f8;
+    --hero-purple:#8078ad;
+    --badge-yellow:#ffbf3f;
+    --footer-yellow:#ffbf3f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  img,video{display:block; max-width:100%;}
+
+  /* NAV — identical to the homepage */
+  .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px;}
+  .nav-logo{display:flex; align-items:center; gap:10px;}
+  .nav-logo img, .nav-logo svg{display:block; height:37px; width:37px; flex-shrink:0;}
+  .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
+  .nav-links{display:flex; align-items:center; gap:32px; font-family:'Inter', sans-serif; font-weight:500; font-size:16px;}
+  .nav-links a{color:var(--badge-yellow); position:relative; padding-bottom:2px;}
+  .nav-links a:not(.nav-cta)::after{content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--pill-amber); transition:width .2s ease;}
+  .nav-links a:not(.nav-cta):hover::after{width:100%;}
+  .nav-links a.nav-cta{background:var(--pill-amber); color:var(--pill-text-light); font-weight:600; padding:8px 24px; border-radius:100px;}
+  .nav-links a.nav-cta:hover{background:var(--pill-amber-dark);}
+
+  .nav-toggle{display:none; align-items:center; justify-content:center; width:32px; height:32px; background:none; border:none; padding:0; cursor:pointer; flex-shrink:0; position:relative;}
+  .nav-toggle-icon{width:24px; height:24px; display:block; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+  .nav-toggle .icon-close{opacity:0;}
+  .nav-toggle.active .icon-burger{opacity:0;}
+  .nav-toggle.active .icon-close{opacity:1;}
+  .nav-whatsapp{display:inline-flex; align-items:center; gap:8px;}
+  .nav-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
+
+  /* LEGAL PAGE CONTENT — simple heading + placeholder, text to be added later. */
+  .legal-header{padding:64px 40px 24px; max-width:900px;}
+  .legal-back{display:inline-flex; align-items:center; gap:6px; font-size:14px; color:var(--muted); margin-bottom:28px;}
+  .legal-back:hover{color:var(--ink);}
+  .legal-title{font-family:'Inter', sans-serif; font-weight:400; font-size:56px; line-height:1.05; color:var(--ink);}
+  .legal-content{max-width:900px; padding:0 40px 120px; font-size:16px; line-height:1.65; color:var(--ink-soft);}
+  .legal-placeholder{color:var(--muted); font-style:italic;}
+  .legal-content h2{font-family:'Inter', sans-serif; font-weight:600; font-size:20px; color:var(--ink); margin:36px 0 12px;}
+  .legal-content h2:first-child{margin-top:0;}
+  .legal-content h3{font-family:'Inter', sans-serif; font-weight:600; font-size:16px; color:var(--ink); margin:20px 0 10px;}
+  .legal-content p{margin-bottom:16px;}
+  .legal-content ul{margin:0 0 16px; padding-left:20px;}
+  .legal-content li{margin-bottom:8px;}
+  .legal-content a{text-decoration:underline; color:var(--ink-soft);}
+  .legal-content a:hover{color:var(--pill-amber-dark);}
+  .legal-updated{color:var(--muted); font-size:14px; margin-top:40px;}
+  .legal-updated-top{color:var(--muted); font-size:14px; margin:0 0 32px;}
+
+  /* FOOTER — two-tier redesign: amber "let's work together" CTA band (big
+     outline "a." mark on the left, heading + contact row centered to the
+     right of it), then a quiet cream info band with the wordmark, links and
+     rights line. Matches Alice's Figma footer — same footer used sitewide. */
+  footer{background:none; padding:0; display:block;}
+  .footer-cta-band{position:relative; background:var(--pill-amber); padding:40px 40px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .footer-cta-inner{position:relative; z-index:1; max-width:640px; margin:0 auto; text-align:center;}
+  .footer-cta-heading{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; text-transform:uppercase; color:#fff; margin-bottom:29px;}
+  .footer-cta-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:32px;}
+  .footer-phone, .footer-email{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; color:#fff;}
+  .footer-whatsapp{display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--pill-amber); font-family:'Inter', sans-serif; font-weight:600; font-size:16px; padding:10px 24px; border-radius:100px; transition:background .2s ease;}
+  .footer-whatsapp:hover{background:#fff2d6;}
+  .footer-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
+  .footer-info-band{position:relative; background:#fff5e0; height:200px;}
+  .footer-info-left{position:absolute; left:18.3%; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px;}
+  .footer-info-name{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:#838383; text-align:left;}
+  .footer-info-links{display:flex; flex-direction:column; gap:6px; font-family:'Inter', sans-serif; font-weight:400; font-size:16px; color:#838383; text-align:left;}
+  .footer-info-rights{position:absolute; left:43.3%; bottom:12%; font-family:'Inter', sans-serif; font-weight:400; font-size:14.4px; color:#838383; white-space:nowrap;}
+  @media (max-width:900px){
+    .footer-cta-heading{font-size:28px;}
+    .footer-cta-row{flex-direction:column; gap:16px;}
+    .footer-whatsapp{order:-1;}
+    .footer-info-band{position:static; height:auto; display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 20px; gap:16px;}
+    .footer-info-left{position:static; transform:none; align-items:center;}
+    .footer-info-rights{position:static; font-size:11.7px; white-space:normal;}
+    .footer-info-name, .footer-info-links{text-align:center;}
+  }
+
+  @media (max-width:900px){
+    .site-nav{padding:16px 20px; gap:12px;}
+    .nav-logo img, .nav-logo svg{height:29px; width:29px;}
+    .nav-logo-text{font-size:15px;}
+    .site-nav{position:relative;}
+    .nav-toggle{display:flex;}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:8px 20px 20px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
+    .nav-links.open{display:flex;}
+    .nav-links a{width:100%; padding:12px 0; font-size:16px; text-align:right;}
+    .nav-links a.nav-cta{width:auto; margin-top:8px;}
+    .legal-header{padding:32px 20px 20px;}
+    .legal-title{font-size:clamp(34px,9vw,48px);}
+    .legal-content{padding:0 20px 64px;}
+  }
+
+  .cookie-banner{position:fixed; left:0; right:0; bottom:0; z-index:200; background:var(--pill-amber); color:var(--ink-soft); padding:18px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 24px; box-shadow:0 -4px 20px rgba(0,0,0,0.18); transform:translateY(100%); transition:transform .3s ease;}
+  .cookie-banner.visible{transform:translateY(0);}
+  .cookie-banner p{font-size:14px; line-height:1.5; max-width:420px; text-align:left; margin:0;}
+  .cookie-banner a{text-decoration:underline; color:var(--ink);}
+  .cookie-banner-categories{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:16px;}
+  .cookie-toggle{position:relative; display:flex; align-items:center; gap:8px; font-family:'Inter', sans-serif; font-size:13px; cursor:pointer; user-select:none;}
+  .cookie-toggle.disabled{cursor:default; opacity:0.75;}
+  .cookie-toggle input{position:absolute; opacity:0; width:0; height:0;}
+  .cookie-toggle-track{position:relative; width:34px; height:20px; border-radius:100px; background:rgba(19,18,18,0.25); transition:background .2s ease; flex-shrink:0;}
+  .cookie-toggle-track::after{content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); transition:transform .2s ease;}
+  .cookie-toggle input:checked + .cookie-toggle-track{background:var(--ink);}
+  .cookie-toggle input:checked + .cookie-toggle-track::after{transform:translateX(14px);}
+  .cookie-toggle input:disabled + .cookie-toggle-track{background:var(--ink); opacity:0.6;}
+  .cookie-banner-actions{display:flex; gap:10px; flex-shrink:0;}
+  .cookie-banner-reject{background:transparent; color:var(--ink-soft); font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:9px 20px; border-radius:100px; border:1.5px solid var(--ink-soft); cursor:pointer; white-space:nowrap;}
+  .cookie-banner-reject:hover{background:rgba(19,18,18,0.08);}
+  .cookie-banner-accept{background:#282828; color:var(--pill-text-light); font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:10px 22px; border-radius:100px; border:none; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .cookie-banner-accept:hover{background:#3a3a3a;}
+  @media (max-width:900px){
+    .cookie-banner{padding:12px 16px; flex-direction:column; gap:8px;}
+    .cookie-banner p{font-size:12px; line-height:1.35; max-width:100%; text-align:center;}
+    .cookie-banner-categories{justify-content:center; gap:10px 14px;}
+    .cookie-toggle{font-size:11px; gap:5px;}
+    .cookie-toggle-track{width:28px; height:16px;}
+    .cookie-toggle-track::after{width:12px; height:12px;}
+    .cookie-toggle input:checked + .cookie-toggle-track::after{transform:translateX(12px);}
+    .cookie-banner-actions{width:100%; gap:8px;}
+    .cookie-banner-actions .cookie-banner-reject, .cookie-banner-actions .cookie-banner-accept{flex:1; padding:7px 12px; font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html"><svg viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="25.2571" cy="25.2571" r="25.2571" fill="#FFBF3F"/><path d="M39.0549 34.5419C37.6419 34.5419 36.498 33.4989 36.498 32.0523C36.498 30.6393 37.6419 29.5628 39.0549 29.5628C40.5352 29.5628 41.6117 30.6393 41.6117 32.0523C41.6117 33.4989 40.5352 34.5419 39.0549 34.5419Z" fill="white"/><path d="M22.6168 34.5421C17.6713 34.5421 14.2734 30.8414 14.2734 25.3577C14.2734 19.8067 17.6377 15.9714 22.4822 15.9714C25.5437 15.9714 27.2595 17.7881 27.8651 18.6965H28.1006V16.4088H32.4741V34.1048H28.1678V31.8507H27.9323C27.4277 32.5909 25.8465 34.5421 22.6168 34.5421ZM23.4579 30.6059C26.3848 30.6059 28.2015 28.251 28.2015 25.2904C28.2015 21.9598 26.1829 19.9412 23.4242 19.9412C20.6319 19.9412 18.7143 22.1616 18.7143 25.2904C18.7143 28.4865 20.6319 30.6059 23.4579 30.6059Z" fill="white"/></svg><span class="nav-logo-text">Alice Kroytor</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <img class="nav-toggle-icon icon-burger" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAVdJREFUeAHt3EERwDAMxECnU2CFXmZJeGgXg+Z+9trXkPUMaQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOLe+b+hywLECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAogTQNzyKrbNAsQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiHIfGWYA4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiHMcGmcB4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHGOQ+MsQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHEOQ6NswBxAogTQJwA4gQQJ4A4AcQJIE4AcQKIE0CcAOIEECeAOAHECSBOAHECiBNAnADiBBAngDgBxAkgTgBxAog74xET8009zhMAAAAASUVORK5CYII=" alt="">
+    <img class="nav-toggle-icon icon-close" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAABMFJREFUeAHtnS2SFEEQRmsJBAKJWIFAIJAIBIIDcAAOgEAikBwBiUAikAgOwAGQCCRiBQKxArkCQQTwxURG7MLsbHd1ZlVmfvkiJrBFvbd/M11ZR7//0gparrWCmgqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnAqAnArAO7/OmiV2Afw83b2Kfr69a+3zM9N9tAkAC/7yYveqCPqAfLxkL432UT+A8ws2XnxaRL5guI+6AexbaEWwjn/lC0b7qBfAoQVWBMu4TL5gsI86ASxZWEVwmKvkC8r7uD2ANQuqCPazVL6guI/bAuhZSEVwkbXyBaV97A9gywIqgh298gWFfTzqeixcS+CN49buv979y8ZW+efB/j1429r1m20tfd8BTt7ofPWyfifQlA+OH3fJB30B3HvZ2s27TQW2CLTl33m6e3XSFwBqw7fuimAdzuSD/l8CK4J1OJQPtv0ZWBEsw6l8sP2NoIrgMI7lA523giuC/TiXD/Q+DKoILhJAPtD9OLgi2BFEPtB/IIQ9gkDygc0jYawRBJMP7B4KZYsgoHxg+1g4SwRB5QP7cwHZIwgsH4w5GJI1guDywbiTQdkiSCAfjD0aliWCJPLB+LOB0SNIJB/MORwaNYJk8sG808HRIkgoH8w9Hh4lgqTywfz5AN4jSCwf+BgQ4TWC5PKBnwkh3iIgkA98jYjxEgGJfOBvRtDsCIjkA59DomZFQCYf+J0SNjoCQvnA95i4URGQygf+5wRaR0AsHxyFuTUMAxMh7uykqYAj1bcetfb9Q1MjmHwQJwCgHYEmAeWDWKNitX8caBFUPog3K9hbBIHlg5jDor1EEFw+iDstfHYECeSD2OPiZ0WQRD6If1/A6AgSyQc5LowYFUEy+SDPjSHWESSUD/IEACQC7cGTt5+klA9yBQDw1q72Q6E/PsUbUrGQXAFof7AjJB5hlycAK/lC0ghyBGAtX0gYQfwARskXkkUQO4DR8oVEEcQNYJZ8IUkEMQOYLV9IEEG8ALzIF4JHECsAbfmdt2z8R+AI4gRg8fTuw/f0Y21jBGD16HbNNg4QgPVz++QR+A5g1KEN4gj8BjD6xA5pBD4DmHVcizACfwHMPqtHFoGvALwc1CSKwE8A3k7pkkTgIwCvR7QJIpgfgPfz+ckjmBtAlOEMiSOYF0C0yRxJI5gTQNSxLAkjGB9AVPlCsgjGBhBdvpAognEBZJEvJIlgTADZ5AsJIrAPIKt8IXgEtgFkly8EjsAuABb5QtAIbAJgky8EjEA/AFb5QrAIdANgly8EikAvgJJ/kSAR6ARQ8vcTIILtAZT8wziPYFsAJX8ZjiPoD6Dkr8NpBH0B4OKG049NjezyBYcR9AWgOZCRRb7g7L6D/h8BkL81Ajb5glYECg62/RK4ZQGs8oWtEWh8ATaNPwN7FsIuX+iNQEk+0HkjaM2CSv5F1kagKB/ovRW8ZGElfz9LI1CWD3Q/DDq0wJJ/mKsiMJAP9D8O3rfQkr+MyyIwkg/sbg6VNymOH5f8tZy/IdVQPrC9Ohb/Ea1ZfGxg776+au3uczP5INbdwYU6uW4MKVZTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZBTAZDzB2MmtRujuJ1hAAAAAElFTkSuQmCC" alt="">
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#projects">Work</a>
+    <a href="https://wa.me/972548100797" target="_blank" rel="noopener" class="nav-cta nav-whatsapp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.113.573 4.09 1.575 5.79L2 22l4.336-1.537a9.945 9.945 0 0 0 5.668 1.53h.004c5.518 0 9.994-4.476 9.994-9.994C21.994 6.476 17.518 2 12.004 2zm0 18.198h-.003a8.19 8.19 0 0 1-4.176-1.145l-.3-.179-3.104 1.1 1.04-3.024-.196-.31a8.195 8.195 0 0 1-1.256-4.373C4.011 7.514 7.53 4 12.005 4c2.19 0 4.248.854 5.796 2.404a8.13 8.13 0 0 1 2.402 5.791c-.002 4.478-3.62 8.003-8.199 8.003z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+</nav>
+
+<header class="legal-header">
+  <a href="index.html" class="legal-back">← Back to home</a>
+  <h1 class="legal-title">Privacy Policy</h1>
+</header>
+
+<div class="legal-content">
+  <p class="legal-updated-top">Last updated: October 2026</p>
+
+  <h2>Who We Are</h2>
+  <p>This website (the &ldquo;Site&rdquo;) is operated by Alice Kroytor, a multidisciplinary designer based in Israel. This Privacy Policy explains how personal information is collected, used, shared and protected when you visit the Site or contact us.</p>
+
+  <h2>Information We Collect</h2>
+
+  <h3>Information You Provide</h3>
+  <p>If you contact us by email or WhatsApp, we may receive information that you choose to provide, including your name, email address, phone number and the content of your message.</p>
+
+  <h3>Information Collected Automatically</h3>
+  <p>When you visit the Site, certain technical information may be collected automatically by the Site and its service providers. This may include your IP address, browser and device type, operating system, referring pages, pages visited and approximate location derived from your IP address.</p>
+  <p>This information may be collected through cookies and similar technologies used by analytics, advertising and website-delivery services. For more information, please see our <a href="cookie-policy.html">Cookie Policy</a>.</p>
+
+  <h2>How We Use Your Information</h2>
+  <p>We may use your information:</p>
+  <ul>
+    <li>To respond to messages, inquiries and project requests</li>
+    <li>To provide, maintain and secure the Site</li>
+    <li>To understand how visitors use the Site and improve its content</li>
+    <li>To measure the performance of marketing and advertising campaigns</li>
+    <li>To comply with applicable legal obligations</li>
+  </ul>
+
+  <h2>Legal Bases for Processing</h2>
+  <p>Where applicable data protection law requires a legal basis, we process personal information on one or more of the following grounds:</p>
+  <ul>
+    <li><strong>Consent</strong> &mdash; for non-essential analytics and advertising technologies, where consent is required</li>
+    <li><strong>Legitimate interests</strong> &mdash; to operate, secure and improve the Site and respond to inquiries</li>
+    <li><strong>Pre-contractual or contractual necessity</strong> &mdash; when you contact us about a potential project or service</li>
+    <li><strong>Legal obligations</strong> &mdash; where processing is required by applicable law</li>
+  </ul>
+  <p>You may withdraw your consent at any time through the cookie settings available on the Site or by contacting us. Withdrawal of consent does not affect processing carried out before consent was withdrawn.</p>
+
+  <h2>Cookies and Similar Technologies</h2>
+  <p>The Site may use cookies and similar technologies for essential website functions, analytics and advertising measurement.</p>
+  <p>Where required by law, non-essential analytics and advertising technologies are not activated until you provide consent. You can accept, reject or change your preferences through the cookie settings available on the Site.</p>
+  <p>Please see our <a href="cookie-policy.html">Cookie Policy</a> for more information about the technologies used and how to manage your preferences.</p>
+
+  <h2>Third-Party Services</h2>
+  <p>Depending on the features enabled on the Site, we may use third-party providers including:</p>
+  <ul>
+    <li><strong>Website and hosting providers</strong> &mdash; to host, secure and deliver the Site</li>
+    <li><strong>Google Fonts</strong> &mdash; to display fonts, if fonts are loaded from Google&rsquo;s servers</li>
+    <li><strong>Google Analytics</strong> &mdash; to understand how visitors use the Site</li>
+    <li><strong>Meta Pixel</strong> &mdash; to measure advertising performance</li>
+    <li><strong>WhatsApp</strong> &mdash; to enable direct communication when you choose to contact us through the service</li>
+    <li><strong>Email service providers</strong> &mdash; to receive and respond to messages</li>
+  </ul>
+  <p>These providers may process information according to their own privacy policies.</p>
+
+  <h2>International Data Transfers</h2>
+  <p>Some service providers may process information outside Israel, the European Economic Area or the United Kingdom. Where required by applicable law, appropriate safeguards are used for international transfers, such as adequacy decisions, standard contractual clauses or other legally recognised mechanisms.</p>
+
+  <h2>Data Retention</h2>
+  <p>We retain personal information only for as long as reasonably necessary for the purposes described in this Privacy Policy, including responding to inquiries, maintaining business records, resolving disputes and complying with legal obligations.</p>
+  <p>Retention periods may vary depending on the nature of the information and the reason for which it was collected. Information collected through analytics and advertising services is retained according to the settings and policies of the relevant provider.</p>
+
+  <h2>Data Security</h2>
+  <p>We take reasonable technical and organisational measures to protect personal information against unauthorised access, loss, misuse or alteration. However, no method of transmission or electronic storage can be guaranteed to be completely secure.</p>
+
+  <h2>Your Rights</h2>
+  <p>Depending on your location and applicable law, including Israel&rsquo;s Privacy Protection Law, 1981, the EU General Data Protection Regulation and the UK General Data Protection Regulation, you may have the right to:</p>
+  <ul>
+    <li>Request access to your personal information</li>
+    <li>Request correction of inaccurate or incomplete information</li>
+    <li>Request deletion of your information</li>
+    <li>Object to or request restriction of certain processing</li>
+    <li>Withdraw consent at any time</li>
+    <li>Request data portability, where applicable</li>
+    <li>Submit a complaint to the relevant data protection authority</li>
+  </ul>
+  <p>To exercise your rights, contact us using the email address below. We may need to verify your identity before completing your request.</p>
+  <p>If you are located in the European Economic Area or the United Kingdom, you may also submit a complaint to the data protection authority in the country where you live or work. Individuals in Israel may contact the Israeli Privacy Protection Authority.</p>
+
+  <h2>Children&rsquo;s Privacy</h2>
+  <p>The Site is not intended for children, and we do not knowingly collect personal information from children.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time to reflect changes to the Site, the services we use or applicable legal requirements. The updated version will be posted on this page with a revised &ldquo;Last updated&rdquo; date.</p>
+
+  <h2>Contact</h2>
+  <p>If you have questions about this Privacy Policy, wish to exercise your privacy rights or have concerns about how your information is handled, please contact:</p>
+  <p>Alice Kroytor<br>Email: <a href="mailto:alicekro@gmail.com">alicekro@gmail.com</a><br>Israel</p>
+  <p>Please also see our <a href="cookie-policy.html">Cookie Policy</a>.</p>
+</div>
+
+<footer id="contact">
+  <div class="footer-cta-band">
+    <div class="footer-cta-inner">
+      <h2 class="footer-cta-heading">Let&rsquo;s work together</h2>
+      <div class="footer-cta-row">
+        <a class="footer-phone" href="tel:+972548100797">+972.54.8100.797</a>
+        <a class="footer-email" href="mailto:alicekro@gmail.com">alicekro@gmail.com</a>
+        <a class="footer-whatsapp" href="https://wa.me/972548100797" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.113.573 4.09 1.575 5.79L2 22l4.336-1.537a9.945 9.945 0 0 0 5.668 1.53h.004c5.518 0 9.994-4.476 9.994-9.994C21.994 6.476 17.518 2 12.004 2zm0 18.198h-.003a8.19 8.19 0 0 1-4.176-1.145l-.3-.179-3.104 1.1 1.04-3.024-.196-.31a8.195 8.195 0 0 1-1.256-4.373C4.011 7.514 7.53 4 12.005 4c2.19 0 4.248.854 5.796 2.404a8.13 8.13 0 0 1 2.402 5.791c-.002 4.478-3.62 8.003-8.199 8.003z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-info-band">
+    <div class="footer-info-left">
+      <p class="footer-info-name">Alice Kroytor</p>
+      <div class="footer-info-links">
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="cookie-policy.html">Cookie policy</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="#" id="cookieSettingsLink">Cookie settings</a>
+      </div>
+    </div>
+    <p class="footer-info-rights">© 2026 Alice Kroytor. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    if(!toggle || !links) return;
+    toggle.addEventListener('click', function(){
+      var isOpen = links.classList.toggle('open');
+      toggle.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <p>We use cookies to improve your experience. See our <a href="cookie-policy.html">Cookie Policy</a> for details.</p>
+  <div class="cookie-banner-categories">
+    <label class="cookie-toggle disabled">
+      <input type="checkbox" id="cookieEssential" checked disabled>
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Essential</span>
+    </label>
+    <label class="cookie-toggle">
+      <input type="checkbox" id="cookieAnalytics">
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Analytics</span>
+    </label>
+    <label class="cookie-toggle">
+      <input type="checkbox" id="cookieAdvertising">
+      <span class="cookie-toggle-track"></span>
+      <span class="cookie-toggle-label">Advertising</span>
+    </label>
+  </div>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-banner-reject" id="cookieRejectAll">Reject All</button>
+    <button type="button" class="cookie-banner-accept" id="cookieSave">Save Preferences</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var KEY = 'cookieConsent';
+    var banner = document.getElementById('cookieBanner');
+    var analyticsInput = document.getElementById('cookieAnalytics');
+    var advertisingInput = document.getElementById('cookieAdvertising');
+    var rejectBtn = document.getElementById('cookieRejectAll');
+    var saveBtn = document.getElementById('cookieSave');
+    var settingsLink = document.getElementById('cookieSettingsLink');
+    if(!banner || !analyticsInput || !advertisingInput || !rejectBtn || !saveBtn) return;
+
+    function readConsent(){
+      try {
+        var raw = localStorage.getItem(KEY);
+        if(!raw) return null;
+        var parsed = JSON.parse(raw);
+        return (parsed && typeof parsed === 'object') ? parsed : null;
+      } catch(e) { return null; }
+    }
+
+    function applyToToggles(consent){
+      analyticsInput.checked = !!(consent && consent.analytics);
+      advertisingInput.checked = !!(consent && consent.advertising);
+    }
+
+    var saved = readConsent();
+    if(saved){
+      applyToToggles(saved);
+    } else {
+      requestAnimationFrame(function(){ banner.classList.add('visible'); });
+    }
+
+    function save(analytics, advertising){
+      var consent = { essential: true, analytics: analytics, advertising: advertising, updatedAt: new Date().toISOString() };
+      try { localStorage.setItem(KEY, JSON.stringify(consent)); } catch(e) {}
+      banner.classList.remove('visible');
+    }
+
+    rejectBtn.addEventListener('click', function(){
+      analyticsInput.checked = false;
+      advertisingInput.checked = false;
+      save(false, false);
+    });
+
+    saveBtn.addEventListener('click', function(){
+      save(analyticsInput.checked, advertisingInput.checked);
+    });
+
+    if(settingsLink){
+      settingsLink.addEventListener('click', function(e){
+        e.preventDefault();
+        applyToToggles(readConsent());
+        banner.classList.add('visible');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
