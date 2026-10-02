@@ -23,7 +23,7 @@
 
   Gallery is flexible: add/remove .gallery-item blocks freely, and add the
   "full" class to any item that should span the full width (for a wide
-  hero shot mid-gallery). Works with either <img> or <video> inside.
+  hero shot mid-gallery). Works with either <img loading="lazy" decoding="async"> or <video> inside.
 -->
 <style>
   :root{
@@ -171,7 +171,7 @@
      square photos, 9:16 stories, and wide 16:9 stills/video can sit in the
      same gallery without distortion or gaps. Add/remove .gallery-item
      freely, mix image + video, pick whichever of square / story / wide
-     matches the actual asset (or once a real <img>/<video> is dropped in,
+     matches the actual asset (or once a real <img loading="lazy" decoding="async">/<video> is dropped in,
      just delete the ratio class and let it size itself naturally).
      .full breaks out to the full gallery width, for an occasional hero shot
      mid-gallery. */
@@ -287,8 +287,8 @@
 <nav class="site-nav">
   <a class="nav-logo" href="index.html"><svg viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="25.2571" cy="25.2571" r="25.2571" fill="#FFBF3F"/><path d="M39.0549 34.5419C37.6419 34.5419 36.498 33.4989 36.498 32.0523C36.498 30.6393 37.6419 29.5628 39.0549 29.5628C40.5352 29.5628 41.6117 30.6393 41.6117 32.0523C41.6117 33.4989 40.5352 34.5419 39.0549 34.5419Z" fill="white"/><path d="M22.6168 34.5421C17.6713 34.5421 14.2734 30.8414 14.2734 25.3577C14.2734 19.8067 17.6377 15.9714 22.4822 15.9714C25.5437 15.9714 27.2595 17.7881 27.8651 18.6965H28.1006V16.4088H32.4741V34.1048H28.1678V31.8507H27.9323C27.4277 32.5909 25.8465 34.5421 22.6168 34.5421ZM23.4579 30.6059C26.3848 30.6059 28.2015 28.251 28.2015 25.2904C28.2015 21.9598 26.1829 19.9412 23.4242 19.9412C20.6319 19.9412 18.7143 22.1616 18.7143 25.2904C18.7143 28.4865 20.6319 30.6059 23.4579 30.6059Z" fill="white"/></svg><span class="nav-logo-text">Alice Kroytor</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
-    <img class="nav-toggle-icon icon-burger" src="images/2d051fcf9478296c.png" alt="">
-    <img class="nav-toggle-icon icon-close" src="images/23d764903d04a131.png" alt="">
+    <img class="nav-toggle-icon icon-burger" src="images/2d051fcf9478296c.png" alt="" loading="lazy" decoding="async">
+    <img class="nav-toggle-icon icon-close" src="images/23d764903d04a131.png" alt="" loading="lazy" decoding="async">
   </button>
   <div class="nav-links" id="navLinks">
     <a href="index.html#projects">Work</a>
@@ -310,19 +310,19 @@
 <button class="slider-arrow slider-arrow-prev" aria-label="Previous photo">&#8249;</button>
 <div class="hero-slider-card">
 <div class="project-slider">
-  <div class="slider-item"><img src="images/f1634201a017b5c6.jpg" alt="MORPHÉ — cover"></div>
-  <div class="slider-item"><img src="images/d41d4560d9035e20.jpg" alt="MORPHÉ catalog — page 1, The New Form"></div>
-  <div class="slider-item"><img src="images/b4c3a9c951964096.jpg" alt="MORPHÉ catalog — page 2, Sculpted Jacket"></div>
-  <div class="slider-item"><img src="images/ab60a05b6f056a94.jpg" alt="MORPHÉ catalog — page 3, Soft Structure material study"></div>
-  <div class="slider-item"><img src="images/0312e7cacc8fd91f.jpg" alt="MORPHÉ catalog — page 4, Soft Silhouette"></div>
-  <div class="slider-item"><img src="images/bf958e2212db0e64.jpg" alt="MORPHÉ catalog — page 5, blue asymmetric shirt detail"></div>
-  <div class="slider-item"><img src="images/8d9aeb92e0c917d2.jpg" alt="MORPHÉ catalog — page 6, Asymmetry in Motion"></div>
-  <div class="slider-item"><img src="images/3b257cc626efc235.jpg" alt="MORPHÉ catalog — page 7, The Edit"></div>
-  <div class="slider-item"><img src="images/babfc3d30c06afeb.jpg" alt="MORPHÉ catalog — page 8, pants"></div>
-  <div class="slider-item"><img src="images/fec63f4f4b09647c.jpg" alt="MORPHÉ catalog — page 9, blue tank top"></div>
-  <div class="slider-item"><img src="images/52a98969bd62a11d.jpg" alt="MORPHÉ catalog — page 10, One Form Four Moods colorways"></div>
-  <div class="slider-item"><img src="images/f4d2973114994fd2.jpg" alt="MORPHÉ catalog — page 11, tote and shoes"></div>
-  <div class="slider-item"><img src="images/c098a213d72e8b03.jpg" alt="MORPHÉ catalog — page 12, The Signature Bag"></div>
+  <div class="slider-item"><img src="images/f1634201a017b5c6.jpg" alt="MORPHÉ — cover" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/d41d4560d9035e20.jpg" alt="MORPHÉ catalog — page 1, The New Form" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/b4c3a9c951964096.jpg" alt="MORPHÉ catalog — page 2, Sculpted Jacket" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/ab60a05b6f056a94.jpg" alt="MORPHÉ catalog — page 3, Soft Structure material study" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/0312e7cacc8fd91f.jpg" alt="MORPHÉ catalog — page 4, Soft Silhouette" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/bf958e2212db0e64.jpg" alt="MORPHÉ catalog — page 5, blue asymmetric shirt detail" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/8d9aeb92e0c917d2.jpg" alt="MORPHÉ catalog — page 6, Asymmetry in Motion" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/3b257cc626efc235.jpg" alt="MORPHÉ catalog — page 7, The Edit" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/babfc3d30c06afeb.jpg" alt="MORPHÉ catalog — page 8, pants" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/fec63f4f4b09647c.jpg" alt="MORPHÉ catalog — page 9, blue tank top" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/52a98969bd62a11d.jpg" alt="MORPHÉ catalog — page 10, One Form Four Moods colorways" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/f4d2973114994fd2.jpg" alt="MORPHÉ catalog — page 11, tote and shoes" loading="lazy" decoding="async"></div>
+  <div class="slider-item"><img src="images/c098a213d72e8b03.jpg" alt="MORPHÉ catalog — page 12, The Signature Bag" loading="lazy" decoding="async"></div>
 </div>
 </div>
 <button class="slider-arrow slider-arrow-next" aria-label="Next photo">&#8250;</button>
@@ -381,13 +381,13 @@
 </header>
 
 <!-- MOCKUPS — 7 standalone 16:9 mockup blocks, one after another. -->
-<div class="project-hero-media"><img src="images/e130ec57bd34c92f.jpg" alt="MORPHÉ mockup 1 — cover"></div>
-<div class="project-hero-media"><img src="images/616d25ed90e86ea6.jpg" alt="MORPHÉ mockup 2 — pages 1-2"></div>
-<div class="project-hero-media"><img src="images/2e2ec559105e4052.jpg" alt="MORPHÉ mockup 3 — pages 3-4"></div>
-<div class="project-hero-media"><img src="images/5aea3dd032e95c41.jpg" alt="MORPHÉ mockup 4 — pages 5-6"></div>
-<div class="project-hero-media"><img src="images/cff09ad3e4217e0a.jpg" alt="MORPHÉ mockup 5 — pages 7-8"></div>
-<div class="project-hero-media"><img src="images/50c2cc282f64554f.jpg" alt="MORPHÉ mockup 6 — pages 9-10"></div>
-<div class="project-hero-media"><img src="images/90d31a25893832dd.jpg" alt="MORPHÉ mockup 7 — pages 11-12"></div>
+<div class="project-hero-media"><img src="images/e130ec57bd34c92f.jpg" alt="MORPHÉ mockup 1 — cover" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/616d25ed90e86ea6.jpg" alt="MORPHÉ mockup 2 — pages 1-2" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/2e2ec559105e4052.jpg" alt="MORPHÉ mockup 3 — pages 3-4" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/5aea3dd032e95c41.jpg" alt="MORPHÉ mockup 4 — pages 5-6" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/cff09ad3e4217e0a.jpg" alt="MORPHÉ mockup 5 — pages 7-8" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/50c2cc282f64554f.jpg" alt="MORPHÉ mockup 6 — pages 9-10" loading="lazy" decoding="async"></div>
+<div class="project-hero-media"><img src="images/90d31a25893832dd.jpg" alt="MORPHÉ mockup 7 — pages 11-12" loading="lazy" decoding="async"></div>
 
 <!-- ALTERNATIVE — a horizontally-scrolling filmstrip (arrows sit on top of
      the images, since there's no white space beside a filmstrip the way
