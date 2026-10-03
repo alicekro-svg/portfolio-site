@@ -156,6 +156,9 @@
      paused. While actually playing, it stays hidden until hover on mouse
      devices and only faintly visible on touch devices, since there's no
      hover state to reveal it there. */
+  .hero-sound-toggle{position:absolute; bottom:24px; right:24px; width:44px; height:44px; border-radius:50%; border:none; background:rgba(0,0,0,0.45); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:3; transition:background .2s ease;}
+  .hero-sound-toggle:hover{background:rgba(0,0,0,0.65);}
+  .hero-sound-toggle svg{width:20px; height:20px; display:block;}
   .video-toggle{position:absolute; right:16px; bottom:16px; width:44px; height:44px; border-radius:50%; border:none; background:rgba(0,0,0,0.45); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:4; opacity:0; transition:opacity .2s ease, background .2s ease;}
   .video-toggle:hover{background:rgba(0,0,0,0.65);}
   .video-toggle:focus-visible{opacity:1;}
@@ -318,12 +321,11 @@
 
 
 <div class="project-hero-media">
-<video src="videos/jeep-hero.mp4" poster="images/dd66e9763aa7d127.jpg" preload="metadata" playsinline></video>
-<button class="video-toggle" aria-label="Play video" aria-pressed="false">
-  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,5 19,12 7,19"/></svg>
-  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+<video src="videos/jeep-hero.mp4" poster="images/dd66e9763aa7d127.jpg" autoplay muted loop playsinline></video>
+<button class="hero-sound-toggle" aria-label="Unmute video" aria-pressed="false">
+  <svg class="icon-muted" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+  <svg class="icon-unmuted" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
 </button>
-<svg class="video-spinner" viewBox="0 0 54 54" aria-hidden="true"><circle class="video-spinner-arc" cx="27" cy="27" r="23.5" fill="none" stroke="var(--pill-amber)" stroke-width="3" stroke-dasharray="37 110.6"/></svg>
 </div>
 
 <header class="project-header">
@@ -472,6 +474,24 @@
   })();
 </script>
 
+<script>
+  (function(){
+    var video = document.querySelector('.project-hero-media video');
+    var btn = document.querySelector('.project-hero-media .hero-sound-toggle');
+    if(!video || !btn) return;
+    var mutedIcon = btn.querySelector('.icon-muted');
+    var unmutedIcon = btn.querySelector('.icon-unmuted');
+    btn.addEventListener('click', function(){
+      video.muted = !video.muted;
+      var isUnmuted = !video.muted;
+      btn.classList.toggle('is-unmuted', isUnmuted);
+      btn.setAttribute('aria-pressed', isUnmuted ? 'true' : 'false');
+      btn.setAttribute('aria-label', isUnmuted ? 'Mute video' : 'Unmute video');
+      mutedIcon.style.display = isUnmuted ? 'none' : 'block';
+      unmutedIcon.style.display = isUnmuted ? 'block' : 'none';
+    });
+  })();
+</script>
 <script>
   (function(){
     function initVideoToggles(){
