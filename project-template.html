@@ -646,6 +646,19 @@
       else if(video.msRequestFullscreen){ video.msRequestFullscreen(); }
     }
     video.addEventListener('click', enterFullscreen);
+    // Some mobile browsers pause the video when exiting native fullscreen
+    // and don't resume it automatically — without this, the hero video is
+    // left frozen on a single frame until the page is reloaded.
+    function resumeAfterFullscreen(){
+      video.play().catch(function(){});
+    }
+    video.addEventListener('webkitendfullscreen', resumeAfterFullscreen);
+    document.addEventListener('fullscreenchange', function(){
+      if(!document.fullscreenElement){ resumeAfterFullscreen(); }
+    });
+    document.addEventListener('webkitfullscreenchange', function(){
+      if(!document.webkitFullscreenElement){ resumeAfterFullscreen(); }
+    });
   })();
 </script>
 
