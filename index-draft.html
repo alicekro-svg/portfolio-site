@@ -74,7 +74,8 @@
      (node 701:1064: wordmark + plain links, no pills), but restyled to match
      the rest of the site's bolder, colorful identity instead of sitting on
      top of it as a disconnected minimal bar. */
-  .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px;}
+  .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px; transition:transform .3s ease;}
+  .site-nav.nav-hidden{transform:translateY(-100%);}
   .nav-logo{display:flex; align-items:center; gap:10px;}
   .nav-logo img, .nav-logo svg{display:block; height:31px; width:31px; flex-shrink:0;}
   .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
@@ -504,6 +505,25 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+  })();
+
+  // AUTO-HIDING STICKY HEADER — stays put (and visible) for the first
+  // screen's worth of scrolling, then slides up out of view once you scroll
+  // further down; scrolling back up at any point brings it straight back.
+  (function(){
+    var nav = document.querySelector('.site-nav');
+    if(!nav) return;
+    var lastY = window.scrollY;
+    var revealThreshold = window.innerHeight;
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if(y > lastY && y > revealThreshold){
+        nav.classList.add('nav-hidden');
+      } else if(y < lastY){
+        nav.classList.remove('nav-hidden');
+      }
+      lastY = y;
+    }, {passive:true});
   })();
 
   (function(){
