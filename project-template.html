@@ -92,7 +92,7 @@
      formats. Optional; delete the block entirely for a project that
      doesn't have a standalone shot to show. */
   .project-hero-media{position:relative; margin:0 40px; margin-top:24px; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:var(--pill-neutral);}
-  .project-hero-media img, .project-hero-media video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .project-hero-media img, .project-hero-media video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;} .project-hero-media video{cursor:pointer;}
   .project-hero-media.square{aspect-ratio:1/1; max-width:560px; margin-left:auto; margin-right:auto;}
   .project-hero-media.portrait{aspect-ratio:4/5; max-width:560px; margin-left:auto; margin-right:auto;}
   .media-tag{position:absolute; top:16px; left:16px; background:var(--paper); color:var(--ink-soft); font-size:12px; padding:6px 12px; border-radius:6px; z-index:2;}
@@ -632,6 +632,20 @@
       mutedIcon.style.display = isUnmuted ? 'none' : 'block';
       unmutedIcon.style.display = isUnmuted ? 'block' : 'none';
     });
+  })();
+</script>
+<script>
+  (function(){
+    var video = document.querySelector('.project-hero-media video');
+    if(!video) return;
+    function enterFullscreen(){
+      if(video.requestFullscreen){ video.requestFullscreen(); }
+      else if(video.webkitEnterFullscreen){ video.webkitEnterFullscreen(); }
+      else if(video.webkitRequestFullscreen){ video.webkitRequestFullscreen(); }
+      else if(video.mozRequestFullScreen){ video.mozRequestFullScreen(); }
+      else if(video.msRequestFullscreen){ video.msRequestFullscreen(); }
+    }
+    video.addEventListener('click', enterFullscreen);
   })();
 </script>
 
