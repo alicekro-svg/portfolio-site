@@ -649,7 +649,18 @@
     // and don't resume it automatically — without this, the hero video is
     // left frozen on a single frame until the page is reloaded.
     function resumeAfterFullscreen(){
-      video.play().catch(function(){});
+      // iOS sometimes ignores a play() call made synchronously inside the
+      // fullscreen-exit event, because the exit transition is still in
+      // progress. Retry with short delays until playback actually resumes.
+      var attempts = 0;
+      function tryPlay(){
+        video.play().catch(function(){});
+        attempts++;
+        if(video.paused && attempts < 6){
+          setTimeout(tryPlay, 150);
+        }
+      }
+      tryPlay();
     }
     video.addEventListener('webkitendfullscreen', resumeAfterFullscreen);
     document.addEventListener('fullscreenchange', function(){
@@ -657,6 +668,13 @@
     });
     document.addEventListener('webkitfullscreenchange', function(){
       if(!document.webkitFullscreenElement){ resumeAfterFullscreen(); }
+    });
+    // Backstop for edge cases (e.g. rotating the phone back while exiting
+    // fullscreen) where neither fullscreen-exit event fires reliably: if
+    // the page becomes visible again and the hero video is unexpectedly
+    // paused, resume it too.
+    document.addEventListener('visibilitychange', function(){
+      if(!document.hidden && video.paused){ resumeAfterFullscreen(); }
     });
   })();
 </script>
