@@ -543,18 +543,32 @@
     // and don't resume it automatically — without this, the hero video is
     // left frozen on a single frame until the page is reloaded.
     function resumeAfterFullscreen(){
-      // iOS sometimes ignores a play() call made synchronously inside the
-      // fullscreen-exit event, because the exit transition is still in
-      // progress. Retry with short delays until playback actually resumes.
+      // video.paused goes false synchronously as soon as play() is called,
+      // even on iOS, where the inline video can be left visually frozen on
+      // the last native-fullscreen frame despite technically "playing" --
+      // so paused alone can't tell us whether it's actually stuck. Nudge
+      // playback a few times, then check whether currentTime is really
+      // advancing; if not, force a hard reload as a guaranteed fix.
       var attempts = 0;
-      function tryPlay(){
+      function kick(){
         video.play().catch(function(){});
+        try {
+          if(video.currentTime > 0.1){ video.currentTime = video.currentTime - 0.1; }
+        } catch(e){}
         attempts++;
-        if(video.paused && attempts < 6){
-          setTimeout(tryPlay, 150);
-        }
+        if(attempts < 4){ setTimeout(kick, 250); }
       }
-      tryPlay();
+      kick();
+      setTimeout(function(){
+        var t1 = video.currentTime;
+        setTimeout(function(){
+          var stuck = !video.paused && Math.abs(video.currentTime - t1) < 0.05;
+          if(stuck){
+            try { video.load(); } catch(e){}
+            video.play().catch(function(){});
+          }
+        }, 400);
+      }, 1200);
     }
     video.addEventListener('webkitendfullscreen', resumeAfterFullscreen);
     document.addEventListener('fullscreenchange', function(){
