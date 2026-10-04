@@ -47,7 +47,8 @@
   img,video{display:block; max-width:100%;}
 
   /* NAV — identical to the homepage */
-    .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px;}
+    .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px; transition:transform .3s ease; box-shadow:0 4px 16px rgba(0,0,0,0.05);}
+  .site-nav.nav-hidden{transform:translateY(-100%);}
   .nav-logo{display:flex; align-items:center; gap:10px;}
   .nav-logo img, .nav-logo svg{display:block; height:37px; width:37px; flex-shrink:0;}
   .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
@@ -198,9 +199,14 @@
   .footer-info-links{display:flex; flex-direction:column; gap:6px; font-family:'Inter', sans-serif; font-weight:400; font-size:16px; color:#838383; text-align:left;}
   .footer-info-rights{position:absolute; left:43.3%; bottom:12%; font-family:'Inter', sans-serif; font-weight:400; font-size:14.4px; color:#838383; white-space:nowrap;}
   @media (max-width:900px){
-    .footer-cta-heading{font-size:28px;}
-    .footer-cta-row{flex-direction:column; gap:16px;}
-    .footer-whatsapp{order:-1;}
+    .footer-cta-band{padding:40px 20px;}
+    .footer-cta-heading{font-size:44px; line-height:42px; font-weight:600; text-align:left; margin-bottom:58px;}
+    .footer-cta-row{flex-direction:column; gap:33px;}
+    .footer-whatsapp{order:-1; width:164px; font-size:17px; justify-content:center;}
+    .footer-whatsapp svg{width:19px; height:19px;}
+    .footer-whatsapp span{position:relative; top:2px;}
+    .footer-phone, .footer-email{font-size:17px; font-weight:700; line-height:1;}
+    .footer-email{margin-top:-10px;}
     .footer-info-band{position:static; height:auto; display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 20px; gap:16px;}
     .footer-info-left{position:static; transform:none; align-items:center;}
     .footer-info-rights{position:static; font-size:11.7px; white-space:normal;}
@@ -210,12 +216,12 @@
   @media (max-width:900px){
         .site-nav{padding:16px 20px; gap:12px;}
     .nav-logo img, .nav-logo svg{height:29px; width:29px;}
-    .nav-logo-text{font-size:15px;}
-    .site-nav{position:relative;}
+    .nav-logo-text{font-size:18px;}
     .nav-toggle{display:flex;}
-    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:8px 20px 20px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
+    .nav-toggle-icon{width:29px; height:29px;}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:32px 20px 20px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
     .nav-links.open{display:flex;}
-    .nav-links a{width:100%; padding:12px 0; font-size:16px; text-align:right;}
+    .nav-links a{width:100%; padding:12px 0; font-size:18px; text-align:right;}
     .nav-links a.nav-cta{width:auto; margin-top:8px;}
     .project-header{padding:32px 20px 24px;}
     .project-title{font-size:44px; line-height:42px; font-weight:600;}
@@ -386,6 +392,25 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+  })();
+
+  // AUTO-HIDING STICKY HEADER — stays put (and visible) for the first
+  // screen's worth of scrolling, then slides up out of view once you scroll
+  // further down; scrolling back up at any point brings it straight back.
+  (function(){
+    var nav = document.querySelector('.site-nav');
+    if(!nav) return;
+    var lastY = window.scrollY;
+    var revealThreshold = window.innerHeight;
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if(y > lastY && y > revealThreshold){
+        nav.classList.add('nav-hidden');
+      } else if(y < lastY){
+        nav.classList.remove('nav-hidden');
+      }
+      lastY = y;
+    }, {passive:true});
   })();
 </script>
 
