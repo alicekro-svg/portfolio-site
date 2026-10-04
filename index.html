@@ -279,7 +279,7 @@
     .handful-heading{font-size:44px; line-height:42px; top:-10px; font-weight:600; text-align:left;}
     .handful-body{text-align:left;}
     .footer-cta-band{padding:40px 20px;}
-    .footer-cta-heading{font-size:44px; line-height:42px; font-weight:600; text-align:left; margin-bottom:58px;}
+    .footer-cta-heading{font-size:44px; line-height:42px; font-weight:600; text-align:center; margin-bottom:58px;}
   }
 
   .cookie-banner{position:fixed; left:0; right:0; bottom:0; z-index:200; background:var(--pill-amber); color:var(--ink-soft); padding:18px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 24px; box-shadow:0 -4px 20px rgba(0,0,0,0.18); transform:translateY(100%); transition:transform .3s ease;}
@@ -345,7 +345,7 @@
 </header>
 
 <section class="pitch-section">
-  <h2 class="pitch-title">Design for brands that want to be seen</h2>
+  <h2 class="pitch-title">Design for brands that want to be noticed</h2>
   <p class="pitch-body">I'm Alice Kroytor, a multidisciplinary designer working across graphic design, art direction, AI-generated imagery and motion. I create distinctive visual worlds for fashion, beauty, architecture, food and brands that want to stand out in an endless stream of content.</p>
 </section>
 
@@ -513,7 +513,7 @@
     var nav = document.querySelector('.site-nav');
     if(!nav) return;
     var lastY = window.scrollY;
-    var revealThreshold = window.innerHeight;
+    var revealThreshold = window.innerHeight / 2;
     window.addEventListener('scroll', function(){
       var y = window.scrollY;
       if(y > lastY && y > revealThreshold){

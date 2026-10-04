@@ -75,8 +75,8 @@
   .project-back:hover{color:var(--ink);}
   .project-title{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; line-height:1.2; text-transform:uppercase; color:var(--pill-amber);}
   .project-tags{display:flex; flex-wrap:wrap; align-items:center; margin:10px 0 24px;}
-  .tag-item{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; line-height:20px; color:var(--pill-amber);}
-  .tag-item:not(:last-child)::after{content:'|'; display:inline-block; margin:0 8px; color:var(--pill-amber);}
+  .tag-item{font-family:'Inter', sans-serif; font-weight:400; font-size:14px; line-height:21px; color:var(--muted);}
+  .tag-item:not(:last-child)::after{content:'\2022'; display:inline-block; color:rgba(19,18,18,0.25); margin:0 8px; font-size:11px; vertical-align:middle;}
   .project-desc{font-size:16px; line-height:1.65; color:var(--ink-soft);}
 
   /* LOGO GRID — one tile per brand mark: 2:1 image + a small caption below
@@ -233,7 +233,7 @@
   .footer-info-rights{position:absolute; left:43.3%; bottom:12%; font-family:'Inter', sans-serif; font-weight:400; font-size:14.4px; color:#838383; white-space:nowrap;}
   @media (max-width:900px){
     .footer-cta-band{padding:40px 20px;}
-    .footer-cta-heading{font-size:44px; line-height:42px; font-weight:600; text-align:left; margin-bottom:58px;}
+    .footer-cta-heading{font-size:44px; line-height:42px; font-weight:600; text-align:center; margin-bottom:58px;}
     .footer-cta-row{flex-direction:column; gap:33px;}
     .footer-whatsapp{order:-1; width:164px; font-size:17px; justify-content:center;}
     .footer-whatsapp svg{width:19px; height:19px;}
@@ -259,7 +259,6 @@
     .project-header{padding:32px 20px 24px;}
     .project-title{font-size:44px; line-height:42px; font-weight:600;}
     .logo-grid{padding:0 20px 48px; gap:32px 20px;}
-    .tag-item{font-size:12px; line-height:18px;}
     .tag-item:not(:last-child)::after{margin:0 6px;}
     .project-text{padding:0 20px 32px;}
     .project-hero-media{margin:16px 0 0; border-radius:0;}
@@ -441,7 +440,7 @@
     var nav = document.querySelector('.site-nav');
     if(!nav) return;
     var lastY = window.scrollY;
-    var revealThreshold = window.innerHeight;
+    var revealThreshold = window.innerHeight / 2;
     window.addEventListener('scroll', function(){
       var y = window.scrollY;
       if(y > lastY && y > revealThreshold){
