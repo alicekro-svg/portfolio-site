@@ -77,7 +77,7 @@
   .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px;}
   .nav-logo{display:flex; align-items:center; gap:10px;}
   .nav-logo img, .nav-logo svg{display:block; height:31px; width:31px; flex-shrink:0;}
-  .nav-logo-text{font-family:'Inter', sans-serif; font-weight:800; font-size:22px; color:var(--pill-amber); white-space:nowrap;}
+  .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
   .nav-links{display:flex; align-items:center; gap:32px; font-family:'Inter', sans-serif; font-weight:500; font-size:16px;}
   .nav-links a{color:var(--badge-yellow); position:relative; padding-bottom:2px;}
   .nav-links a:not(.nav-cta)::after{content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--pill-amber); transition:width .2s ease;}
@@ -147,7 +147,7 @@
      pitch) — just enough copy to frame who Alice is before the work speaks
      for itself. */
   .pitch-section{max-width:960px; margin:0 auto; padding:67px 40px 56px; text-align:left;}
-  .pitch-title{font-family:'Inter', sans-serif; font-weight:700; font-size:38px; line-height:1.2; text-transform:uppercase; color:var(--pill-amber); margin-bottom:20px;}
+  .pitch-title{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; line-height:1.2; text-transform:uppercase; color:var(--pill-amber); margin-bottom:20px;}
   .pitch-body{font-size:16px; line-height:1.7; color:var(--ink-soft);}
   /* SERVICES TICKER — full-bleed animated marquee strip, orange background,
      white uppercase text, continuous scroll. Sits directly under the pitch
@@ -156,8 +156,8 @@
      moves exactly one copy's width, so the loop is seamless. */
   .services-ticker{width:100%; overflow:hidden; background:var(--pill-amber); padding:16px 0;}
   .services-ticker-track{display:flex; width:max-content; animation:services-ticker-scroll 28s linear infinite;}
-  .services-ticker-item{display:flex; align-items:center; white-space:nowrap; font-family:'Inter', sans-serif; font-weight:600; font-size:15px; letter-spacing:0.03em; text-transform:uppercase; color:#fff;}
-  .services-ticker-item .sep{margin:0 28px; opacity:1; color:#fff; font-size:50%; vertical-align:middle;}
+  .services-ticker-item{display:flex; align-items:center; white-space:nowrap; font-family:'Inter', sans-serif; font-weight:600; font-size:15px; letter-spacing:0.03em; text-transform:uppercase; color:#fff2d6;}
+  .services-ticker-item .sep{margin:0 28px; opacity:1; color:#fff2d6; font-size:50%; vertical-align:middle;}
   @keyframes services-ticker-scroll{
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
@@ -183,13 +183,13 @@
   @media (max-width:900px){
     .site-nav{padding:16px 20px; gap:12px;}
     .nav-logo img, .nav-logo svg{height:24px; width:24px;}
-    .nav-logo-text{font-size:18px;}
+    .nav-logo-text{font-size:15px;}
+    .site-nav{position:relative;}
     .nav-toggle{display:flex;}
-    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:28px 20px 36px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-end; gap:0; padding:8px 20px 20px; background:var(--paper); box-shadow:0 12px 20px rgba(0,0,0,0.08);}
     .nav-links.open{display:flex;}
-    .nav-links a{width:100%; padding:12px 0; font-size:20px; font-weight:600; text-align:right;}
-    .nav-links a.nav-cta{width:auto; margin-top:24px;}
-    .nav-links a.nav-cta.nav-whatsapp{font-size:20px; padding:10px 28px;}
+    .nav-links a{width:100%; padding:12px 0; font-size:16px; text-align:right;}
+    .nav-links a.nav-cta{width:auto; margin-top:8px;}
     .pillbar{padding:16px 20px; gap:10px;}
     .pill{padding:8px 18px; font-size:13px;}
     .hero{height:auto; display:flex; flex-direction:column;}
@@ -212,7 +212,7 @@
      the project grid. Filters are functional (data-filter / data-category
      matching, see script at the bottom) but the real category assignments
      are still pending Alice's input — see the TODO comment near the grid. */
-  .portfolio-heading{font-family:'Inter', sans-serif; font-weight:700; font-size:38px; text-align:center; color:var(--pill-amber); margin:0 0 24px;}
+  .portfolio-heading{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; text-align:center; color:var(--pill-amber); margin:0 0 24px;}
   .filter-pills{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:40px;}
   .filter-pill{display:inline-flex; align-items:center; justify-content:center; padding:5px 16px; border-radius:100px; border:1px solid var(--pill-amber); background:transparent; color:var(--pill-amber); font-family:'Inter', sans-serif; font-weight:600; font-size:12px; letter-spacing:0.02em; text-transform:uppercase; white-space:nowrap; cursor:pointer; transition:background .2s ease, color .2s ease;}
   .filter-pill.active{background:var(--pill-amber); color:var(--pill-text-light); border-color:var(--pill-amber);}
@@ -229,7 +229,7 @@
   /* HANDFUL-OF-PHOTOS SECTION — new copy block between the project grid and
      the footer (final text agreed with Alice earlier in this project). */
   .handful-section{max-width:960px; margin:0 auto; padding:40px 40px 64px; text-align:center;}
-  .handful-heading{font-family:'Inter', sans-serif; font-weight:700; font-size:32px; color:var(--pill-amber); margin-bottom:20px;}
+  .handful-heading{font-family:'Inter', sans-serif; font-weight:500; font-size:32px; color:var(--pill-amber); margin-bottom:20px;}
   .handful-body{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; line-height:1.65; color:var(--ink-soft);}
 
   /* FOOTER — two-tier redesign: amber "let's work together" CTA band (big
@@ -241,15 +241,15 @@
   .nav-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
   .footer-cta-band{position:relative; background:var(--pill-amber); padding:40px 40px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
   .footer-cta-inner{position:relative; z-index:1; max-width:640px; margin:0 auto; text-align:center;}
-  .footer-cta-heading{font-family:'Inter', sans-serif; font-weight:700; font-size:38px; text-transform:uppercase; color:#fff; margin-bottom:29px;}
+  .footer-cta-heading{font-family:'Inter', sans-serif; font-weight:500; font-size:38px; text-transform:uppercase; color:#fff; margin-bottom:29px;}
   .footer-cta-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:32px;}
-  .footer-phone, .footer-email{font-family:'Inter', sans-serif; font-weight:600; font-size:16px; color:#fff;}
+  .footer-phone, .footer-email{font-family:'Inter', sans-serif; font-weight:500; font-size:16px; color:#fff;}
   .footer-whatsapp{display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--pill-amber); font-family:'Inter', sans-serif; font-weight:600; font-size:16px; padding:10px 24px; border-radius:100px; transition:background .2s ease;}
   .footer-whatsapp:hover{background:#fff2d6;}
   .footer-whatsapp svg{width:16px; height:16px; display:block; flex-shrink:0;}
   .footer-info-band{position:relative; background:#fff5e0; height:200px;}
   .footer-info-left{position:absolute; left:18.3%; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px;}
-  .footer-info-name{font-family:'Inter', sans-serif; font-weight:800; font-size:22px; color:#838383; text-align:left;}
+  .footer-info-name{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:#838383; text-align:left;}
   .footer-info-links{display:flex; flex-direction:column; gap:6px; font-family:'Inter', sans-serif; font-weight:400; font-size:16px; color:#838383; text-align:left;}
   .footer-info-rights{position:absolute; left:43.3%; bottom:12%; font-family:'Inter', sans-serif; font-weight:400; font-size:14.4px; color:#838383; white-space:nowrap;}
 
@@ -264,7 +264,7 @@
     .footer-info-name, .footer-info-links{text-align:center;}
     .filter-pills{flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; gap:8px; padding:0 20px 4px; margin:0 -20px 40px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
     .filter-pills::-webkit-scrollbar{display:none;}
-    .filter-pill{flex:0 0 auto; height:32px; padding:0 20px; font-size:12px; font-weight:800;}
+    .filter-pill{flex:0 0 auto; font-size:10px; padding:4px 12px;}
   }
   @media (max-width:600px){
     .pitch-title{font-size:24px;}
