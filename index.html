@@ -75,7 +75,6 @@
      the rest of the site's bolder, colorful identity instead of sitting on
      top of it as a disconnected minimal bar. */
   .site-nav{position:sticky; top:0; z-index:50; background:var(--paper); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:20px 42px; transition:transform .6s ease; box-shadow:0 4px 16px rgba(0,0,0,0.05);}
-  .site-nav.nav-hidden{transform:translateY(-100%);}
   .nav-logo{display:flex; align-items:center; gap:10px;}
   .nav-logo img, .nav-logo svg{display:block; height:37px; width:37px; flex-shrink:0;}
   .nav-logo-text{font-family:'Inter', sans-serif; font-weight:600; font-size:18px; color:var(--pill-amber); white-space:nowrap;}
@@ -183,6 +182,7 @@
      fallback layered on top, not part of the source file. */
   @media (max-width:900px){
     .site-nav{padding:16px 20px; gap:12px;}
+    .site-nav.nav-hidden{transform:translateY(-100%);}
     .nav-logo img, .nav-logo svg{height:29px; width:29px;}
     .nav-logo-text{font-size:18px;}
     .nav-toggle{display:flex;}
