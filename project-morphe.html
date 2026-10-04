@@ -489,17 +489,15 @@
     });
   })();
 
-  // AUTO-HIDING STICKY HEADER — stays put (and visible) for the first
-  // screen's worth of scrolling, then slides up out of view once you scroll
-  // further down; scrolling back up at any point brings it straight back.
+  // AUTO-HIDING STICKY HEADER — slides out of view on the very first
+  // downward scroll; scrolling back up at any point brings it straight back.
   (function(){
     var nav = document.querySelector('.site-nav');
     if(!nav) return;
     var lastY = window.scrollY;
-    var revealThreshold = window.innerHeight;
     window.addEventListener('scroll', function(){
       var y = window.scrollY;
-      if(y > lastY && y > revealThreshold){
+      if(y > lastY){
         nav.classList.add('nav-hidden');
       } else if(y < lastY){
         nav.classList.remove('nav-hidden');
