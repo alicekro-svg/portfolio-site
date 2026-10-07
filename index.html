@@ -301,6 +301,23 @@
   .cookie-banner-reject:hover{background:rgba(19,18,18,0.08);}
   .cookie-banner-accept{background:#282828; color:var(--pill-text-light); font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:10px 22px; border-radius:100px; border:none; cursor:pointer; white-space:nowrap; flex-shrink:0;}
   .cookie-banner-accept:hover{background:#3a3a3a;}
+  .whatsapp-fab{display:none;}
+  @media (max-width:720px){
+    .whatsapp-fab{
+      display:inline-flex; align-items:center; gap:8px;
+      position:fixed; right:16px; bottom:16px; z-index:190;
+      height:54px; width:150px; padding:0 20px 0 16px;
+      background:var(--pill-amber); color:var(--pill-text-light);
+      font-family:'Inter', sans-serif; font-weight:600; font-size:16px;
+      border-radius:100px; box-shadow:0 6px 18px rgba(19,18,18,0.28);
+      text-decoration:none; overflow:hidden; white-space:nowrap;
+      transition:width .5s cubic-bezier(.4,0,.2,1), padding .5s cubic-bezier(.4,0,.2,1), gap .5s cubic-bezier(.4,0,.2,1);
+    }
+    .whatsapp-fab.collapsed{width:54px; padding:0; gap:0; justify-content:center;}
+    .whatsapp-fab svg{width:19px; height:19px; display:block; flex-shrink:0; fill:currentColor;}
+    .whatsapp-fab .wa-fab-label{display:inline-block; max-width:120px; opacity:1; overflow:hidden; white-space:nowrap; transition:max-width .4s ease, opacity .25s ease;}
+    .whatsapp-fab.collapsed .wa-fab-label{max-width:0; opacity:0;}
+  }
   @media (max-width:900px){
     .cookie-banner{padding:12px 16px; flex-direction:column; gap:8px;}
     .cookie-banner p{font-size:12px; line-height:1.35; max-width:100%; text-align:center;}
@@ -720,6 +737,20 @@
         banner.classList.add('visible');
       });
     }
+  })();
+</script>
+
+<a class="whatsapp-fab" id="waFab" href="https://wa.me/972548100797" target="_blank" rel="noopener" aria-label="Message Alice on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2.01 6.476 2.01 11.994c0 2.113.573 4.09 1.575 5.79L2 22l4.336-1.537a9.945 9.945 0 0 0 5.668 1.53h.004c5.518 0 9.994-4.476 9.994-9.994C21.994 6.476 17.518 2 12.004 2zm0 18.198h-.003a8.19 8.19 0 0 1-4.176-1.145l-.3-.179-3.104 1.1 1.04-3.024-.196-.31a8.195 8.195 0 0 1-1.256-4.373C4.011 7.514 7.53 4 12.005 4c2.19 0 4.248.854 5.796 2.404a8.13 8.13 0 0 1 2.402 5.791c-.002 4.478-3.62 8.003-8.199 8.003z"/></svg>
+  <span class="wa-fab-label">WhatsApp</span>
+</a>
+<script>
+  (function(){
+    var fab = document.getElementById('waFab');
+    if(!fab) return;
+    setTimeout(function(){
+      fab.classList.add('collapsed');
+    }, 3000);
   })();
 </script>
 
