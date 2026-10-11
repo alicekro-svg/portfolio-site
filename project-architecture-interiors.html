@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Analytics (GA4) — only actually loads once the visitor accepts
+     analytics in the cookie banner below; see loadGoogleAnalytics(). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.__gaLoaded = false;
+  function loadGoogleAnalytics(){
+    if (window.__gaLoaded) return;
+    window.__gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-T5QWM1811X';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-T5QWM1811X');
+  }
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
@@ -695,6 +713,7 @@
     var saved = readConsent();
     if(saved){
       applyToToggles(saved);
+      if(saved.analytics){ loadGoogleAnalytics(); }
     } else {
       requestAnimationFrame(function(){ banner.classList.add('visible'); });
     }
@@ -702,6 +721,7 @@
     function save(analytics, advertising){
       var consent = { essential: true, analytics: analytics, advertising: advertising, updatedAt: new Date().toISOString() };
       try { localStorage.setItem(KEY, JSON.stringify(consent)); } catch(e) {}
+      if(analytics){ loadGoogleAnalytics(); }
       banner.classList.remove('visible');
     }
 
@@ -724,8 +744,6 @@
     }
   })();
 </script>
-
-</body>
 
 </body>
 </html>
